@@ -62,7 +62,7 @@ public class HandEvaluator {
 		ArrayList <Integer> idList = new ArrayList<Integer>(winnerList.size());
 
 		for(int i = 0; i < winnerList.size(); i++){
-			idList.add(i, players.get(winnerList.get(i)).id);
+			idList.add(i, players.get(winnerList.get(i)).getID());
 		}
 		return idList;
 	}

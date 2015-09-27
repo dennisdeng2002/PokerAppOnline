@@ -41,6 +41,7 @@ public class PokerWebSocket {
     private void send(String message){
         try{
             if (session.isOpen()){
+                System.out.println("sent");
                 session.getRemote().sendString(message);
             }
         }catch(IOException e){

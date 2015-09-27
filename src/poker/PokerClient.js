@@ -4,6 +4,7 @@ var webSocket = new WebSocket("ws://localhost:8080/PokerClient")
 //annotated methods in the PokerWebSocket are called
 webSocket.onopen = function(){
     addMessage("Connected to PokerApp")
+    addMessage("Waiting for player to connect")
 }
 
 webSocket.onclose = function(){
@@ -20,11 +21,16 @@ webSocket.onerror = function(error){
 
 function addMessage(message){
     var currentMessages = document.getElementById("messageArea")
-    currentMessages.value = currentMessages.value + message + "\n"
+    if(message == "new"){
+        currentMessages.value = ""
+    }
+    else{
+        currentMessages.value = currentMessages.value + message + "\n"
+    }
 }
 
 function sendToServer(message){
-    webSocket.send(message)
+    webSocket.send(message.value)
     //Reset input field
-    document.getElementById("inputField").value = "";
+    document.getElementById("inputField").value = ""
 }

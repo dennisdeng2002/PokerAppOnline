@@ -21,9 +21,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public boolean endAction;
     public boolean isAllIn;
     //ID is essentially their seat number
-    public final int id;
-    private final int otherPlayerID;
-    public Session session;
+    private int id;
+    private int otherPlayerID;
+    private Session session;
     private Scanner in;
     private ObjectOutputStream out;
     private ArrayList<String> messages;
@@ -45,7 +45,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         isAllIn = false;
         this.session = session;
         messages = new ArrayList<String>();
-        turnToAct = false;
+        turnToAct = true;
         this.otherPlayerID = otherPlayerID;
         isPlaying = false;
         try {
@@ -125,6 +125,22 @@ public class HeadsUpPlayer extends Thread implements Serializable{
 
         folded = true;
 
+    }
+
+    public int getID(){
+        return this.id;
+    }
+
+    public int getOtherPlayerID(){
+        return this.otherPlayerID;
+    }
+
+    public void setID(int id){
+        this.id = id;
+    }
+
+    public void setOtherPlayerID(int id){
+        this.otherPlayerID = id;
     }
 
     //This method gets called from a method in the Hand object (startStreet())
@@ -309,6 +325,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     private void clearMessages(){
         //Clear messages (usually called after send)
         messages.clear();
+        //Used in the client side javascript to determine when to clear previous messages
+        messages.add("new");
     }
 
     private void send(){
@@ -346,7 +364,12 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public void receiveMessage(String message){
         System.out.println("Message received");
         System.out.println(message);
-        recievedMessage = message;
+        if(turnToAct){
+            recievedMessage = message;
+        }
+        else{
+            recievedMessage = null;
+        }
     }
 
     public void setTurnToAct(boolean bool){

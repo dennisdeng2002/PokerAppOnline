@@ -138,7 +138,7 @@ public class HeadsUpHand implements Serializable {
                 if (activePlayers.size() == 1) {
                     for(int l = 0; l < game.players.size(); l++){
                         //Find winning player (for loop allows for players to be removed)
-                        if(game.players.get(l).id == activePlayers.get(0).id){
+                        if(game.players.get(l).getID() == activePlayers.get(0).getID()){
                             game.players.get(l).winPot(pot);
                             break;
                         }
@@ -280,7 +280,7 @@ public class HeadsUpHand implements Serializable {
             for(int l = 0; l < game.players.size(); l++){
                 for(int m = 0; m < idList.size(); m++){
                     //Find winning player (for loop allows for players to be removed)
-                    if(game.players.get(l).id == idList.get(m)){
+                    if(game.players.get(l).getID() == idList.get(m)){
                         game.players.get(l).winPot(pot);
                         if(splitPot){
                             winnerMessage = "Split pot";
@@ -341,7 +341,7 @@ public class HeadsUpHand implements Serializable {
 
     public void foldedMessage(HeadsUpPokerGame game, int streetIn){
         //Gets id of player who hasn't folded
-        int winnerID = activePlayers.get(0).id;
+        int winnerID = activePlayers.get(0).getID();
         int loserID;
         if(winnerID == 0){
             loserID = 1;

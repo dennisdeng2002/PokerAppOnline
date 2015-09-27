@@ -15,6 +15,12 @@ public class PokerLobby extends Thread{
         while(true){
             if(connectedPlayers.size()>1){
                 //Currently only works for 1 concurrent game (may have to use HeadsUpDriver instead)
+                connectedPlayers.get(0).setID(0);
+                connectedPlayers.get(0).setOtherPlayerID(1);
+
+                connectedPlayers.get(1).setID(1);
+                connectedPlayers.get(1).setOtherPlayerID(0);
+
                 connectedPlayers.get(0).start();
                 connectedPlayers.get(1).start();
                 while(connectedPlayers.get(0).getPlayerName()==null ||connectedPlayers.get(0).getPlayerName()==null){
@@ -25,6 +31,7 @@ public class PokerLobby extends Thread{
                     }
                 }
                 HeadsUpPokerGame pokerGame = new HeadsUpPokerGame(2, connectedPlayers.get(0), connectedPlayers.get(1));
+                connectedPlayers.clear();
             }
         }
     }
