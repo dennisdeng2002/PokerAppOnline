@@ -20,7 +20,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.26" level="application_server_libraries" />
-    <orderEntry type="library" name="WebSocket-1.0" level="project" />
     <orderEntry type="library" name="org.eclipse.jetty.websocket:websocket-server:9.2.2.v20140723" level="project" />
     <orderEntry type="library" name="org.eclipse.jetty.websocket:websocket-api:9.2.2.v20140723" level="project" />
     <orderEntry type="library" name="org.eclipse.jetty:jetty-server:9.0.0.M3" level="project" />

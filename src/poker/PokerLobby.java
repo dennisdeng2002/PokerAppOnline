@@ -1,44 +1,48 @@
 package poker;
 
-import java.io.IOException;
 import java.util.*;
 
 public class PokerLobby extends Thread{
 
     //List must be synchronized in order to update size in while loop of run()
-    private static List<HeadsUpPlayer> connectedPlayers = Collections.synchronizedList(new ArrayList<>());
+    private List<HeadsUpPlayer> players = Collections.synchronizedList(new ArrayList<>());
+    private List<HeadsUpPlayer> queuedPlayers = Collections.synchronizedList(new ArrayList<>());
 
     public PokerLobby(){}
 
     public void run(){
         System.out.println("Running");
         while(true){
-            if(connectedPlayers.size()>1){
-                //Currently only works for 1 concurrent game (may have to use HeadsUpDriver instead)
-                connectedPlayers.get(0).setID(0);
-                connectedPlayers.get(0).setOtherPlayerID(1);
+            if(queuedPlayers.size()>1 && queuedPlayers.get(0).getPlayerName() != null && queuedPlayers.get(1).getPlayerName() != null){
+                setPlayerIDs(queuedPlayers);
+                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0),queuedPlayers.get(1));
+                driver.start();
+                queuedPlayers.clear();
+            }
 
-                connectedPlayers.get(1).setID(1);
-                connectedPlayers.get(1).setOtherPlayerID(0);
-
-                connectedPlayers.get(0).start();
-                connectedPlayers.get(1).start();
-                while(connectedPlayers.get(0).getPlayerName()==null ||connectedPlayers.get(0).getPlayerName()==null){
-                    try{
-                        Thread.sleep(100);
-                    }catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-                HeadsUpPokerGame pokerGame = new HeadsUpPokerGame(2, connectedPlayers.get(0), connectedPlayers.get(1));
-                connectedPlayers.clear();
+            //Allow system to pause every 500 ms
+            try{
+                Thread.sleep(500);
+            }catch (InterruptedException e){
+                e.printStackTrace();
             }
         }
     }
 
     public void addPlayer(HeadsUpPlayer player){
-        System.out.println("Player added");
-        connectedPlayers.add(player);
-        System.out.println(connectedPlayers.size());
+        //Keeps track of all players in game
+        players.add(player);
+        //Adds a new player to queue
+        queuedPlayers.add(player);
     }
+
+    public void setPlayerIDs(List<HeadsUpPlayer> queuedPlayers){
+        queuedPlayers.get(0).setID(0);
+        queuedPlayers.get(0).setOtherPlayerID(1);
+
+        queuedPlayers.get(1).setID(1);
+        queuedPlayers.get(1).setOtherPlayerID(0);
+
+    }
+
 }

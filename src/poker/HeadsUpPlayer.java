@@ -24,8 +24,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     private int id;
     private int otherPlayerID;
     private Session session;
-    private Scanner in;
-    private ObjectOutputStream out;
     private ArrayList<String> messages;
     private String recievedMessage;
     private String response;
@@ -36,7 +34,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
 
     public HeadsUpPlayer(String name, int money, int id, Session session, int otherPlayerID) {
 
-        Socket socket = new Socket();
         this.name = name;
         this.money = money;
         this.id = id;
@@ -48,24 +45,19 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         turnToAct = true;
         this.otherPlayerID = otherPlayerID;
         isPlaying = false;
-        try {
-            in = new Scanner(new InputStreamReader(socket.getInputStream()));
-            out = new ObjectOutputStream(socket.getOutputStream());
-        }catch(IOException e){
-        }
 
     }
 
+    //Runs once when player connects (start Thread)
     public void run(){
-        System.out.println("Player running");
-        //Runs when player thread is started
-        addMessage("Game has started");
-        addMessage("Enter player name");
-        send();
-        clearMessages();
-        this.name = receive();
+        if(this.name==null){
+            addMessage("Enter player name");
+            send();
+            clearMessages();
+            this.name = receive();
+        }
         //Output message and end player thread (Driver is paused until both names are inputted)
-        addMessage("Waiting for other player to input name");
+        addMessage("Waiting for player to connect");
         send();
         clearMessages();
     }
@@ -223,7 +215,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         }
                         catch(InputMismatchException e) {
                             addMessage("Not a number");
-                            in.next();
                             continue;
                         }
                     }
@@ -341,6 +332,10 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
     private String receive(){
+        //Response is the message actually used for input by this player
+        //Receivedmessages is the message that is received when client presses enter (see method receiveMessage)
+        //This method allows for the player class to wait until the message is correctly received before moving on
+        //to the next line for input
         response = null;
         try {
             while(response == null){
@@ -357,19 +352,22 @@ public class HeadsUpPlayer extends Thread implements Serializable{
             e.printStackTrace();
         }
         receiveMessage(null);
-        System.out.println("Response sent");
         return response;
     }
 
     public void receiveMessage(String message){
-        System.out.println("Message received");
-        System.out.println(message);
         if(turnToAct){
             recievedMessage = message;
         }
         else{
             recievedMessage = null;
         }
+    }
+
+    public void startGameMessage(String opponent){
+        addMessage("Game has started, your opponent is " + opponent);
+        send();
+        clearMessages();
     }
 
     public void setTurnToAct(boolean bool){

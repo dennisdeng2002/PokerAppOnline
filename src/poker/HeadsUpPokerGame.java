@@ -40,16 +40,6 @@ public class HeadsUpPokerGame implements Serializable {
 
         players = new ArrayList<HeadsUpPlayer>();
 
-        try {
-            while (player1.getPlayerName()==null || player2.getPlayerName()==null) {
-                //Wait for both players to input names before continuing
-                //Allows server to only check every 100 ms
-                //Code for some reason doesn't function correctly without sleep (may be due to refreshing game state after waking)
-                Thread.sleep(100);
-            }
-        }catch(InterruptedException e){
-        }
-
         players.add(player1);
         players.add(player2);
 
@@ -60,6 +50,15 @@ public class HeadsUpPokerGame implements Serializable {
         //Initially, game will always be live....
         //until only 1 player is remaining
         gameIsLive = true;
+
+        player1.startGameMessage(player2.getPlayerName());
+        player2.startGameMessage(player1.getPlayerName());
+
+        try{
+            Thread.sleep(5000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
 
         startNewHand();
 

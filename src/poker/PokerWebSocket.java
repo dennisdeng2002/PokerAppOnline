@@ -12,11 +12,11 @@ public class PokerWebSocket {
 
     private org.eclipse.jetty.websocket.api.Session session;
     private HeadsUpPlayer player;
-    private InputStream input;
 
     @OnWebSocketConnect
     public void handleConnect (org.eclipse.jetty.websocket.api.Session session) {
         player = new HeadsUpPlayer(null, 200, -1, session, -1);
+        player.start();
         PokerServer.lobby.addPlayer(player);
         System.out.println("Client connected...");
         this.session = session;
@@ -29,7 +29,6 @@ public class PokerWebSocket {
 
     @OnWebSocketMessage
     public void handleMessage (String message) {
-        System.out.println(message);
         player.receiveMessage(message);
     }
 

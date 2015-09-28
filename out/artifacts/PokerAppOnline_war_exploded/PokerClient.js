@@ -8,6 +8,7 @@ webSocket.onopen = function(){
 }
 
 webSocket.onclose = function(){
+    addMessage("new")
     addMessage("Disconnected from PokerApp")
 }
 

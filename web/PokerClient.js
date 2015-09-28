@@ -4,10 +4,10 @@ var webSocket = new WebSocket("ws://localhost:8080/PokerClient")
 //annotated methods in the PokerWebSocket are called
 webSocket.onopen = function(){
     addMessage("Connected to PokerApp")
-    addMessage("Waiting for player to connect")
 }
 
 webSocket.onclose = function(){
+    addMessage("new")
     addMessage("Disconnected from PokerApp")
 }
 

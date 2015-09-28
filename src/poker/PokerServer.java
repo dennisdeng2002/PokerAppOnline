@@ -18,8 +18,9 @@ public class PokerServer {
 
         server.setHandler(ctx);
         server.start();
+        //Wait 1000ms to insure server has started
+        Thread.sleep(1000);
         lobby.start();
-//        server.join();
     }
 
     public static class PokerServlet extends WebSocketServlet {
