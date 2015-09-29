@@ -195,9 +195,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 isAllIn = true;
                                 hand.increaseAllInCounter();
                                 isCorrect = true;
-                                if(streetIn!=12){
-                                    game.players.get(otherPlayerID).addMessage(name + " is all in");
-                                }
+                                game.players.get(otherPlayerID).addMessage(name + " is all in");
                             } else if(betSize < 2*minimumBet || betSize == 0) {
                                 addMessage("Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)

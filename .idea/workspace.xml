@@ -2,29 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d0b7027-56c9-423d-a220-3268de5f433c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/WebSocket_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/demo/stocks.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/demo/stocks.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerClient.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/demo/stocks.html" afterPath="$PROJECT_DIR$/web/stocks.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/demo/stocks.js" afterPath="$PROJECT_DIR$/web/stocks.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/poker/PokerClient.html" afterPath="$PROJECT_DIR$/web/PokerClient.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/poker/PokerClient.js" afterPath="$PROJECT_DIR$/web/PokerClient.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/HeadsUpPlayer.class" afterPath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/HeadsUpPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerServer.class" afterPath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceServer$StockServiceSocketServlet.class" afterPath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceServer$StockServiceSocketServlet.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceServer.class" afterPath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceWebSocket.class" afterPath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/StockServiceWebSocket.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerLobby.class" afterPath="$PROJECT_DIR$/out/production/PokerAppOnline/poker/PokerLobby.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/HandEvaluator.java" afterPath="$PROJECT_DIR$/src/poker/HandEvaluator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/HeadsUpPlayer.java" afterPath="$PROJECT_DIR$/src/poker/HeadsUpPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/HeadsUpPokerGame.java" afterPath="$PROJECT_DIR$/src/poker/HeadsUpPokerGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PokerAppOnline.iml" afterPath="$PROJECT_DIR$/PokerAppOnline.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/PokerAppOnline_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/PokerAppOnline_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/PokerLobby.java" afterPath="$PROJECT_DIR$/src/poker/PokerLobby.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/PokerServer.java" afterPath="$PROJECT_DIR$/src/poker/PokerServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/poker/PokerWebSocket.java" afterPath="$PROJECT_DIR$/src/poker/PokerWebSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/stocks.js" afterPath="$PROJECT_DIR$/out/artifacts/PokerAppOnline_war_exploded/WEB-INF/classes/demo/stocks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PokerAppOnline.iws" />
@@ -48,23 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PokerServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/poker/PokerServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PokerLobby.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poker/PokerLobby.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="12" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -80,15 +51,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PokerWebSocket.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PokerWebSocket.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/poker/PokerWebSocket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-0.47058824">
+              <caret line="20" column="50" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="50" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,29 +64,31 @@
       <file leaf-file-name="PokerClient.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/PokerClient.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.75">
-              <caret line="14" column="27" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.625">
+              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeadsUpHand.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HeadsUpHand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpHand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5147059">
-              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="354" column="48" selection-start-line="354" selection-start-column="48" selection-end-line="354" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PokerClient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/PokerClient.js">
+      <file leaf-file-name="PokerServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/poker/PokerServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-              <folding />
+              <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,24 +97,64 @@
         <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1801#1802#0" expanded="true" />
-                <element signature="e#1828#1829#0" expanded="true" />
-                <element signature="e#1863#1864#0" expanded="true" />
-                <element signature="e#1895#1896#0" expanded="true" />
-                <element signature="e#2572#2573#0" expanded="true" />
-                <element signature="e#2602#2603#0" expanded="true" />
-                <element signature="e#2782#2783#0" expanded="true" />
-                <element signature="e#2821#2822#0" expanded="true" />
-                <element signature="e#10299#10300#0" expanded="true" />
-                <element signature="e#10336#10337#0" expanded="true" />
-                <element signature="e#10449#10450#0" expanded="true" />
-                <element signature="e#10481#10482#0" expanded="true" />
-                <element signature="e#12522#12523#0" expanded="true" />
-                <element signature="e#12554#12555#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/myTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-222.22223">
+              <caret line="400" column="23" selection-start-line="400" selection-start-column="23" selection-end-line="400" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4503#4509#0" expanded="true" />
+                <element signature="e#4768#4774#0" expanded="true" />
+                <element signature="e#5048#5054#0" expanded="true" />
+                <element signature="e#5332#5338#0" expanded="true" />
+                <element signature="e#5674#5680#0" expanded="true" />
+                <element signature="e#5838#5844#0" expanded="true" />
+                <element signature="e#6207#6224#0" expanded="true" />
+                <element signature="e#7524#7530#0" expanded="true" />
+                <element signature="e#7650#7656#0" expanded="true" />
+                <element signature="e#8074#8080#0" expanded="true" />
+                <element signature="e#8218#8224#0" expanded="true" />
+                <element signature="e#8487#8493#0" expanded="true" />
+                <element signature="e#8806#8812#0" expanded="true" />
+                <element signature="e#9051#9057#0" expanded="true" />
+                <element signature="e#9334#9340#0" expanded="true" />
+                <element signature="e#9476#9482#0" expanded="true" />
+                <element signature="e#9621#9627#0" expanded="true" />
+                <element signature="e#9766#9772#0" expanded="true" />
+                <element signature="e#9911#9917#0" expanded="true" />
+                <element signature="e#10056#10062#0" expanded="true" />
+                <element signature="e#10216#10231#0" expanded="true" />
+                <element signature="e#12030#12047#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/poker/Deck.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HandEvaluator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/poker/HandEvaluator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="25" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -176,16 +186,17 @@
         <option value="$PROJECT_DIR$/src/demo/StockServiceServer.java" />
         <option value="$PROJECT_DIR$/src/poker/PokerClient.html" />
         <option value="$PROJECT_DIR$/src/poker/HeadsUpDriver.java" />
-        <option value="$PROJECT_DIR$/src/poker/HandEvaluator.java" />
         <option value="$PROJECT_DIR$/src/poker/HeadsUpHand.java" />
         <option value="$PROJECT_DIR$/src/poker/PokerServer.java" />
         <option value="$PROJECT_DIR$/src/poker/PokerClient.js" />
         <option value="$PROJECT_DIR$/src/poker/HeadsUpPokerGame.java" />
         <option value="$PROJECT_DIR$/web/PokerClient.js" />
         <option value="$PROJECT_DIR$/web/PokerClient.html" />
-        <option value="$PROJECT_DIR$/src/poker/HeadsUpPlayer.java" />
         <option value="$PROJECT_DIR$/src/poker/PokerWebSocket.java" />
         <option value="$PROJECT_DIR$/src/poker/PokerLobby.java" />
+        <option value="$PROJECT_DIR$/src/poker/HandEvaluator.java" />
+        <option value="$PROJECT_DIR$/src/poker/HeadsUpPlayer.java" />
+        <option value="$PROJECT_DIR$/src/tests/myTests.java" />
       </list>
     </option>
   </component>
@@ -211,7 +222,6 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="729" />
@@ -239,7 +249,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -286,6 +296,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PokerAppOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PokerAppOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="poker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -304,24 +332,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PokerAppOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PokerAppOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="out" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -346,45 +360,135 @@
       <recent name="$PROJECT_DIR$/web" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PokerServer">
-    <configuration default="false" name="StockServiceServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.myTests.testHandEvaluator">
+    <configuration default="false" name="myTests.testFlush" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="demo.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="demo.StockServiceServer" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="PokerAppOnline" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.myTests" />
+      <option name="METHOD_NAME" value="testFlush" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="PokerAppOnline" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PokerServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="myTests.testStraight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="poker.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="poker.PokerServer" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="PokerAppOnline" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.myTests" />
+      <option name="METHOD_NAME" value="testStraight" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="PokerAppOnline" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="myTests.testTwoPair" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="PokerAppOnline" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.myTests" />
+      <option name="METHOD_NAME" value="testTwoPair" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="myTests.testStraightFlush" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="PokerAppOnline" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.myTests" />
+      <option name="METHOD_NAME" value="testStraightFlush" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="myTests.testHandEvaluator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="PokerAppOnline" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.myTests" />
+      <option name="METHOD_NAME" value="testHandEvaluator" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.26" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
@@ -1221,15 +1325,21 @@
       </ConfigurationWrapper>
       <method />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.StockServiceServer" />
-      <item index="1" class="java.lang.String" itemvalue="Application.PokerServer" />
-      <item index="2" class="java.lang.String" itemvalue="Jetty Server.Jetty 9.3.3" />
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Jetty Server.Jetty 9.3.3" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.myTests.testFlush" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.myTests.testStraight" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.myTests.testTwoPair" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.myTests.testStraightFlush" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.myTests.testHandEvaluator" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.PokerServer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.StockServiceServer" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.myTests.testHandEvaluator" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.myTests.testStraight" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.myTests.testStraightFlush" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.myTests.testTwoPair" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.myTests.testFlush" />
       </list>
     </recent_temporary>
   </component>
@@ -1248,14 +1358,16 @@
       <workItem from="1443367128097" duration="552000" />
       <workItem from="1443378449917" duration="57000" />
       <workItem from="1443384650256" duration="10576000" />
+      <workItem from="1443476635132" duration="732000" />
+      <workItem from="1443490837156" duration="7569000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27097000" />
+    <option name="totallyTimeSpent" value="35398000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1280" height="729" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="729" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1270,14 +1382,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5031299" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32718894" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25078124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33939394" sideWeight="0.4968701" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33939394" sideWeight="0.4968701" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1334,6 +1446,16 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/poker/PokerServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1357,8 +1479,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1377,20 +1499,6 @@
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1801#1802#0" expanded="true" />
-            <element signature="e#1828#1829#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2602#2603#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10336#10337#0" expanded="true" />
-            <element signature="e#10449#10450#0" expanded="true" />
-            <element signature="e#10481#10482#0" expanded="true" />
-            <element signature="e#12522#12523#0" expanded="true" />
-            <element signature="e#12554#12555#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1442,8 +1550,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1454,20 +1562,6 @@
           <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1801#1802#0" expanded="true" />
-            <element signature="e#1828#1829#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2602#2603#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10336#10337#0" expanded="true" />
-            <element signature="e#10449#10450#0" expanded="true" />
-            <element signature="e#10481#10482#0" expanded="true" />
-            <element signature="e#12522#12523#0" expanded="true" />
-            <element signature="e#12554#12555#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1526,8 +1620,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1538,20 +1632,6 @@
           <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1801#1802#0" expanded="true" />
-            <element signature="e#1828#1829#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2602#2603#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10336#10337#0" expanded="true" />
-            <element signature="e#10449#10450#0" expanded="true" />
-            <element signature="e#10481#10482#0" expanded="true" />
-            <element signature="e#12522#12523#0" expanded="true" />
-            <element signature="e#12554#12555#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1593,13 +1673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/poker/HandEvaluator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3515625">
-          <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/demo/StockServiceServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1625,7 +1698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1633,7 +1705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1641,7 +1712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.125">
           <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1649,7 +1719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.75">
           <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1657,7 +1726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,7 +1733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1673,7 +1740,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.073529415">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1681,7 +1747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14705883">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1689,6 +1754,112 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.007352941">
           <caret line="67" column="6" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/PokerClient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/Deck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/Rank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.32352942">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/HandEvaluator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="25" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-222.22223">
+          <caret line="400" column="23" selection-start-line="400" selection-start-column="23" selection-end-line="400" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4503#4509#0" expanded="true" />
+            <element signature="e#4768#4774#0" expanded="true" />
+            <element signature="e#5048#5054#0" expanded="true" />
+            <element signature="e#5332#5338#0" expanded="true" />
+            <element signature="e#5674#5680#0" expanded="true" />
+            <element signature="e#5838#5844#0" expanded="true" />
+            <element signature="e#6207#6224#0" expanded="true" />
+            <element signature="e#7524#7530#0" expanded="true" />
+            <element signature="e#7650#7656#0" expanded="true" />
+            <element signature="e#8074#8080#0" expanded="true" />
+            <element signature="e#8218#8224#0" expanded="true" />
+            <element signature="e#8487#8493#0" expanded="true" />
+            <element signature="e#8806#8812#0" expanded="true" />
+            <element signature="e#9051#9057#0" expanded="true" />
+            <element signature="e#9334#9340#0" expanded="true" />
+            <element signature="e#9476#9482#0" expanded="true" />
+            <element signature="e#9621#9627#0" expanded="true" />
+            <element signature="e#9766#9772#0" expanded="true" />
+            <element signature="e#9911#9917#0" expanded="true" />
+            <element signature="e#10056#10062#0" expanded="true" />
+            <element signature="e#10216#10231#0" expanded="true" />
+            <element signature="e#12030#12047#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/PokerClient.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpHand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="354" column="48" selection-start-line="354" selection-start-column="48" selection-end-line="354" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1703,77 +1874,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/PokerClient.js">
+    <entry file="file://$PROJECT_DIR$/src/poker/PokerLobby.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1801#1802#0" expanded="true" />
-            <element signature="e#1828#1829#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2602#2603#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10336#10337#0" expanded="true" />
-            <element signature="e#10449#10450#0" expanded="true" />
-            <element signature="e#10481#10482#0" expanded="true" />
-            <element signature="e#12522#12523#0" expanded="true" />
-            <element signature="e#12554#12555#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/PokerClient.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.75">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/poker/PokerWebSocket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poker/PokerLobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/poker/HeadsUpHand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5147059">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+        <state vertical-scroll-proportion="-0.47058824">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="50" />
           <folding />
         </state>
       </provider>

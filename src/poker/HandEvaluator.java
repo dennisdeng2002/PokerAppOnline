@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-//Hand strength will be stored in an Integerarray of size 5.
+//Hand strength will be stored in an Integer array of size 5.
 // index 0 = strength rank
 // index 1 = value of quad,highest straight, 
 // index 2 = depends. if has2pair, lower of the 2 pair
@@ -55,9 +55,6 @@ public class HandEvaluator {
 			playerStrengths[i] = determineStrength(allCardz);
 		}
 
-		System.out.println(Arrays.toString(board));
-		System.out.println(Arrays.toString(playerStrengths[0]));
-		System.out.println(Arrays.toString(playerStrengths[1]));
 		ArrayList <Integer> winnerList = determineWinner(playerStrengths);
 		ArrayList <Integer> idList = new ArrayList<Integer>(winnerList.size());
 

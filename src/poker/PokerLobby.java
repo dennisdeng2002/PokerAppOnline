@@ -17,7 +17,10 @@ public class PokerLobby extends Thread{
                 setPlayerIDs(queuedPlayers);
                 HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0),queuedPlayers.get(1));
                 driver.start();
-                queuedPlayers.clear();
+                //Remove is safer than clear since there is a small possibility
+                //player is added to queue while a new game is starting
+                queuedPlayers.remove(0);
+                queuedPlayers.remove(1);
             }
 
             //Allow system to pause every 500 ms
