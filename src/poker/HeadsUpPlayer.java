@@ -29,8 +29,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     private String response;
     private boolean turnToAct;
     public boolean isPlaying;
-    //should we make it mutable? and allow PlayGame to modify it?
-    //add more variables
+    public boolean isConnected;
+    private HeadsUpPokerGame game;
 
     public HeadsUpPlayer(String name, int money, int id, Session session, int otherPlayerID) {
 
@@ -44,11 +44,12 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         messages = new ArrayList<String>();
         turnToAct = true;
         this.otherPlayerID = otherPlayerID;
+        isConnected = true;
         isPlaying = false;
 
     }
 
-    //Runs once when player connects (start Thread)
+    //Runs only once when player connects (might be unnecessary to start Thread just to add name)
     public void run(){
         if(this.name==null){
             addMessage("Enter player name");
@@ -56,10 +57,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
             clearMessages();
             this.name = receive();
         }
-        //Output message and end player thread (Driver is paused until both names are inputted)
-        addMessage("Waiting for player to connect");
-        send();
-        clearMessages();
+        waitingMessage();
     }
 
     public String getPlayerName(){
@@ -135,6 +133,14 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         this.otherPlayerID = id;
     }
 
+    public void setGame(HeadsUpPokerGame game){
+        this.game = game;
+    }
+
+    public HeadsUpPokerGame getGame(){
+        return this.game;
+    }
+
     //This method gets called from a method in the Hand object (startStreet())
     //In that method, each player is looped through to act();
     public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn) {
@@ -143,20 +149,23 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         String action;
         int betSize = minimumBet;
         if(!this.folded && !this.isAllIn) {
-            while(!isCorrect){
+            while(!isCorrect && isPlaying){
                 //Output board
-                hand.printBoard(game, streetIn, game.handNumber, this);
+                hand.printBoard(streetIn, game.handNumber, this);
                 // Output hand and player stats
                 addMessage(this.toString(game));
                 addMessage("Bet/Check/Call/Fold");
                 send();
                 clearMessages();
+                if(!isPlaying){
+                    break;
+                }
                 action = receive();
                 // Checks what action user inputs
                 if(action.equalsIgnoreCase("Bet")) {
                     while(true){
                         //Output board
-                        hand.printBoard(game, streetIn, game.handNumber, this);
+                        hand.printBoard(streetIn, game.handNumber, this);
                         // Output hand and player stats
                         addMessage(this.toString(game));
                         try{
@@ -165,6 +174,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                             clearMessages();
                             //Requires exception?
                             try{
+                                if(!isPlaying){
+                                    break;
+                                }
                                 betSize = Integer.parseInt(receive());
                             }catch(NumberFormatException e){
                                 e.printStackTrace();
@@ -246,6 +258,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         }
                     }
                     else{
+                        //Otherwise calling subtracts the betsize minus the money you already put in the point
+                        //Allows the returned bet-size to stay the same, thus indicating a call in the Hand class
                         this.spendMoney(minimumBet - streetMoney);
                         hand.addToPot(minimumBet - streetMoney);
                         isCorrect = true;
@@ -274,7 +288,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         clearMessages();
         addMessage(message);
         //Output board
-        hand.printBoard(game, streetIn, game.handNumber, this);
+        hand.printBoard(streetIn, game.handNumber, this);
         // Output hand and player stats
         addMessage(this.toString(game));
         send();
@@ -321,7 +335,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     private void send(){
         try {
             for(int i = 0; i < messages.size(); i++){
-                //Send all messages
+                //Send all messages one by one
                 session.getRemote().sendString(messages.get(i));
             }
         }catch(IOException e){
@@ -331,9 +345,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
 
     private String receive(){
         //Response is the message actually used for input by this player
-        //Receivedmessages is the message that is received when client presses enter (see method receiveMessage)
-        //This method allows for the player class to wait until the message is correctly received before moving on
-        //to the next line for input
+        //receivedMessage is the message that is received when client presses enter (see method receiveMessage())
+        //This method allows for the player class to continuously check for messages until the incoming message is received
         response = null;
         try {
             while(response == null){
@@ -366,6 +379,18 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         addMessage("Game has started, your opponent is " + opponent);
         send();
         clearMessages();
+    }
+
+    public void waitingMessage(){
+        addMessage("Waiting for player to connect");
+        send();
+        clearMessages();
+    }
+
+    public void sendOpponentMessage(String message){
+        game.players.get(otherPlayerID).addMessage(message);
+        game.players.get(otherPlayerID).send();
+        game.players.get(otherPlayerID).clearMessages();
     }
 
     public void setTurnToAct(boolean bool){

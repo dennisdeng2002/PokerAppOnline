@@ -11,6 +11,7 @@ webSocket.onclose = function(){
     addMessage("Disconnected from PokerApp")
 }
 
+//These are messages received from the server
 webSocket.onmessage = function(message){
     addMessage(message.data)
 }
@@ -19,8 +20,11 @@ webSocket.onerror = function(error){
     console.log("Error", error)
 }
 
+//Displays messages on messageArea
 function addMessage(message){
     var currentMessages = document.getElementById("messageArea")
+    //Anytime a message starts with new we clear the messageArea
+    //Allows for multi-line messages from the server (all messages are appended otherwise)
     if(message == "new"){
         currentMessages.value = ""
     }
@@ -29,6 +33,7 @@ function addMessage(message){
     }
 }
 
+//Function is called when enter is pressed, sends content of the textfield
 function sendToServer(message){
     webSocket.send(message.value)
     //Reset input field

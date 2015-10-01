@@ -25,6 +25,16 @@ public class PokerWebSocket {
     @OnWebSocketClose
     public void handleClose (int statusCode, String reason) {
         System.out.println("Connection closed with statusCode = " + statusCode + ", reason = " + reason);
+        //Check if player is currently playing a game
+        if(player.isPlaying){
+            //Check if game has two players (probably can find a safer way to do this)
+            if(player.getGame().players.size()==2){
+                player.isConnected = false;
+                player.sendOpponentMessage(player.getPlayerName() + " has disconnected, returning to player lobby");
+                player.getGame().endCurrentGame();
+                PokerServer.lobby.removePlayer(player);
+            }
+        }
     }
 
     @OnWebSocketMessage
@@ -40,7 +50,6 @@ public class PokerWebSocket {
     private void send(String message){
         try{
             if (session.isOpen()){
-                System.out.println("sent");
                 session.getRemote().sendString(message);
             }
         }catch(IOException e){

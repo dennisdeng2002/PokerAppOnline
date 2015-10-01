@@ -19,6 +19,7 @@ public class HeadsUpHand implements Serializable {
     private ArrayList<HeadsUpPlayer> activePlayers;
     private Card [] board;
     private int startingIndex;
+    private HeadsUpPokerGame game;
 
     //This hand lives inside an array which a PokerGame object has access to.
     //This constructor will create a temporary array of players which will be
@@ -27,6 +28,7 @@ public class HeadsUpHand implements Serializable {
     //will be pre-loaded in this constructor. They will become visible accordingly
     //as action proceeds.
     public HeadsUpHand(HeadsUpPokerGame game) {
+        this.game = game;
         //copy over players from the game class as a shallow copy
         //so we can remove players that folded
         activePlayers = new ArrayList<HeadsUpPlayer>(game.players);
@@ -49,11 +51,11 @@ public class HeadsUpHand implements Serializable {
 
         //pre-burn 3 cards
         deck.deal(3);
+        startPreFlop();
 
-        startPreFlop(game);
     }
 
-    public void printBoard(HeadsUpPokerGame game, int street, int handNum, HeadsUpPlayer player) {
+    public void printBoard(int street, int handNum, HeadsUpPlayer player) {
 
         switch(street) {
             case PRE_FLOP:
@@ -80,7 +82,7 @@ public class HeadsUpHand implements Serializable {
 
     }
 
-    private void startStreet(HeadsUpPokerGame game, int streetIn, int startingIndex) {
+    private void startStreet(int streetIn, int startingIndex) {
 
         //initialize currentBet according to street.
         int currentBet = (streetIn == PRE_FLOP) ? game.BIG_BLIND : 0;
@@ -108,7 +110,15 @@ public class HeadsUpHand implements Serializable {
 
         game.players.get(startingIndex).setEndAction(true);
 
-        while(true) {
+        //Game mechanics work by first displaying the correct spectator message, and then player action occurs and a bet size
+        //is returned. Once a bet has been made, it's stored as playerbet, and previousbet is set as currentbet (starts as 0 or BB if pre)
+        //If playerbet is larger than previousbet, we set currentbet to playerbet, and then set that player to where endAction is.
+        //This allows us to differentiate calling (which doesn't change currentbet and endaction) and betting, as well as track/compare player bets
+        //and what the previous bet size was. Any time a playerbet is larger than the currentbet, the FOR loop is restarted, so that everyone
+        //gets another chnage to act. Once tempcounter reaches player behind endAction, after that player acts action ends and it breaks out of WHILE loop.
+        //If a player bets all-in, and there is only one player left to act, he is allowed to act first
+        //and then allinCounter is incremented so that all players are "considered" all in (hence the check of allinc = activeplayer.size(), not activeplayer.size()-1).
+        while(true && game.gameIsLive) {
             for (int i = 0; i < game.players.size(); i++) {
                 //If everyone is all in skip till handevaluator
                 if(allInCounter == activePlayers.size()){
@@ -133,7 +143,7 @@ public class HeadsUpHand implements Serializable {
                 previousBet = currentBet;
 
                 //Constantly update who's folded
-                removePlayers(game);
+                removePlayers();
                 //End while loop when only one player remains
                 if (activePlayers.size() == 1) {
                     for(int l = 0; l < game.players.size(); l++){
@@ -202,20 +212,21 @@ public class HeadsUpHand implements Serializable {
     }
 
 
-    private void startPreFlop(HeadsUpPokerGame game) {
-        startStreet(game, PRE_FLOP, game.actionIndex);
+    private void startPreFlop() {
+        startStreet(PRE_FLOP, game.actionIndex);
+
         //Only moves to flop if there are still people in pot
         if(activePlayers.size()!=1){
-            startFlop(game);
+            startFlop();
         }
         //Output folded message
         else{
-            foldedMessage(game, PRE_FLOP);
+            foldedMessage(PRE_FLOP);
         }
 
     }
 
-    private void startFlop(HeadsUpPokerGame game){
+    private void startFlop(){
         //Flip order of who acts postflop (headsup)
         if(game.totalPlayers==2){
             if(game.actionIndex == 0){
@@ -235,35 +246,35 @@ public class HeadsUpHand implements Serializable {
             }
         }
 
-        startStreet(game, FLOP, startingIndex);
+        startStreet(FLOP, startingIndex);
+
         //Only moves to turn if there are still people in pot
         if(activePlayers.size()!=1){
-            startTurn(game);
+            startTurn();
         }
         //Output folded message
         else{
-            foldedMessage(game, FLOP);
+            foldedMessage(FLOP);
         }
-
     }
 
-    private void startTurn(HeadsUpPokerGame game){
+    private void startTurn(){
 
-        startStreet(game, TURN, startingIndex);
+        startStreet(TURN, startingIndex);
+
         //Only moves to river if there are still people in pot
         if(activePlayers.size()!=1){
-            startRiver(game);
+            startRiver();
         }
         //Output folded message
         else{
-            foldedMessage(game, TURN);
+            foldedMessage(TURN);
         }
-
     }
 
-    private void startRiver(HeadsUpPokerGame game){
+    private void startRiver(){
 
-        startStreet(game, RIVER, startingIndex);
+        startStreet(RIVER, startingIndex);
         //Used to ouput whoever is the winner to the screen
         String winnerMessage = "";
         boolean splitPot = false;
@@ -287,7 +298,6 @@ public class HeadsUpHand implements Serializable {
                         }
                         else{
                             winnerMessage = game.players.get(l).getPlayerName() + " wins with " + Arrays.toString(game.players.get(l).getHoleCards());
-                            System.out.println(winnerMessage);
                         }
                         break;
                     }
@@ -325,7 +335,7 @@ public class HeadsUpHand implements Serializable {
         }
     }
 
-    private void removePlayers(HeadsUpPokerGame game){
+    private void removePlayers(){
         //Cycle through all activePlayers and remove them as they fold
         for(int k = 0; k < activePlayers.size(); k++){
             if (activePlayers.get(k).playerFolded()) {
@@ -339,7 +349,7 @@ public class HeadsUpHand implements Serializable {
         allInCounter++;
     }
 
-    public void foldedMessage(HeadsUpPokerGame game, int streetIn){
+    public void foldedMessage(int streetIn){
         //Gets id of player who hasn't folded
         int winnerID = activePlayers.get(0).getID();
         int loserID;
@@ -354,9 +364,9 @@ public class HeadsUpHand implements Serializable {
 
         game.players.get(0).spectate(this, game, streetIn, winnerMessage);
         game.players.get(1).spectate(this, game, streetIn, winnerMessage);
-        //Pause game for 5000ms
+        //Pause game for 2500ms
         try{
-            Thread.sleep(5000);
+            Thread.sleep(2500);
         }catch (InterruptedException e){
             e.printStackTrace();
         }

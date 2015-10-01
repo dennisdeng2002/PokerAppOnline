@@ -10,6 +10,7 @@ public class PokerLobby extends Thread{
 
     public PokerLobby(){}
 
+    //Poker lobby runs continuously, and starts a new game whenever two players are in the queue
     public void run(){
         System.out.println("Running");
         while(true){
@@ -20,7 +21,7 @@ public class PokerLobby extends Thread{
                 //Remove is safer than clear since there is a small possibility
                 //player is added to queue while a new game is starting
                 queuedPlayers.remove(0);
-                queuedPlayers.remove(1);
+                queuedPlayers.remove(0);
             }
 
             //Allow system to pause every 500 ms
@@ -46,6 +47,14 @@ public class PokerLobby extends Thread{
         queuedPlayers.get(1).setID(1);
         queuedPlayers.get(1).setOtherPlayerID(0);
 
+    }
+
+    public void addPlayerToQueue(HeadsUpPlayer player){
+        queuedPlayers.add(player);
+        player.waitingMessage();
+    }
+
+    public void removePlayer(HeadsUpPlayer player){
     }
 
 }
