@@ -1,5 +1,8 @@
 package poker;
 
+import com.sun.tools.javac.util.ArrayUtils;
+import org.eclipse.jetty.util.ArrayUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,14 +10,14 @@ import java.util.Random;
 
 public class Deck {
 
-	private Card[] cards;
+	private ArrayList<Card> cards;
 
 	public Deck() {
-		cards = new Card[52];
+		cards = new ArrayList<Card>();
         int i = 0;
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                cards[i++] = new Card(rank, suit);
+                cards.add(new Card(rank, suit));
             }
         }
     }
@@ -22,22 +25,22 @@ public class Deck {
 	//Copy constructor. Instantiates an aliased new deck of cards. 
 	public Deck(Deck other) {
 		
-		this.cards = new Card[other.cards.length];
-		for (int i = 0; i < cards.length; i++) {
-			this.cards[i] = other.cards[i];
+		this.cards = new ArrayList<Card>(other.cards.size());
+		for (int i = 0; i < cards.size(); i++) {
+			this.cards.set(i, other.cards.get(i));
 		}
 		
 	}
 
 	public Card getCardAt(int position) {
 		
-		return this.cards[position];
+		return this.cards.get(position);
 		
 	}
 
 	public int getNumCards() {
 		
-		return this.cards.length;
+		return this.cards.size();
 	}
 
 	//Does the Fisher-Yates shuffling algorithm on this deck of cards
@@ -45,13 +48,13 @@ public class Deck {
 
 		Random rn = new Random();
 		
-		for (int i = cards.length-1; i > 0; i--) {
+		for (int i = cards.size()-1; i > 0; i--) {
 			
 			int swapIdx = rn.nextInt(i+1);
 			
-			Card temp = cards[swapIdx];
-			cards[swapIdx] = cards[i];
-			cards[i] = temp; 
+			Card temp = cards.get(swapIdx);
+			cards.set(swapIdx, cards.get(i));
+			cards.set(i, temp);
 			
 		}
 		
@@ -62,20 +65,20 @@ public class Deck {
 	// cards[3]
 	public void cut(int position) {
 		
-		Card[] tempDeck = new Card[this.cards.length];
+		ArrayList<Card> tempDeck = new ArrayList<Card>(this.cards.size());
 
 		int belowCut = position;
 		int aboveCut = 0;
-		for (int i = 0; i < tempDeck.length; i++) {
-			if (i < tempDeck.length - position) {
-				tempDeck[i] = this.cards[belowCut++];
+		for (int i = 0; i < tempDeck.size(); i++) {
+			if (i < tempDeck.size() - position) {
+				tempDeck.set(i, this.cards.get(belowCut++));
 			} else {
-				tempDeck[i] = this.cards[aboveCut++];
+				tempDeck.set(i, this.cards.get(aboveCut++));
 			}
 		}
 		
-		for (int i = 0; i < this.cards.length; i++) {
-			this.cards[i] = tempDeck[i];
+		for (int i = 0; i < this.cards.size(); i++) {
+			tempDeck.set(i, tempDeck.get(i));
 		}
 		
 	}
@@ -86,16 +89,16 @@ public class Deck {
 	//Re-indexes this deck such that there are no null pointers in the beginning.
 	public Card[] deal(int numCards) {
 
-		int copylength = this.cards.length - numCards;
+		int copylength = this.cards.size() - numCards;
 
 		Card[] dealtDeck = new Card[copylength];
 		Card[] dealtCards = new Card[numCards];
 
 		//Arraycopy(source array, source start point, target array, target start point, length copied
-		System.arraycopy(this.cards, numCards, dealtDeck, 0, copylength);
-		System.arraycopy(this.cards, 0, dealtCards, 0, numCards);
+		System.arraycopy(this.cards.toArray(), numCards, dealtDeck, 0, copylength);
+		System.arraycopy(this.cards.toArray(), 0, dealtCards, 0, numCards);
 
-		this.cards = dealtDeck;
+		this.cards = new ArrayList<>(Arrays.asList(dealtDeck));
 		return dealtCards;
 		
 	}
@@ -107,12 +110,17 @@ public class Deck {
 		this.deal(1);
 		
 	}
-	
-	public String toString() {
-		
-		return Arrays.deepToString(cards);
+
+	public void removeCards(Card[] cardsForRemoval){
+		for(int i = 0; i < cardsForRemoval.length; i++){
+			for(int j = 0; j < cards.size(); j++){
+				if(cardsForRemoval[i].equals(cards.get(j))){
+					cards.remove(j);
+				}
+			}
+		}
 	}
-	
+
 	public boolean equals(Object other) {
 		
 		if (!(other instanceof Deck)) {
@@ -121,7 +129,7 @@ public class Deck {
 		
 		Deck o = (Deck)other;
 		for (int i = 0; i < this.getNumCards(); i++) {
-			if (this.cards[i].equals(o.cards[i]) == false) {
+			if (this.cards.get(i).equals(o.cards.get(i)) == false) {
 				return false;
 			}
 		}

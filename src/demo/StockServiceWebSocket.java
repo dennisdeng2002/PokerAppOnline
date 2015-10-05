@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+//Demo used to implement html-javascript-java interface
 @WebSocket
 public class StockServiceWebSocket {
 

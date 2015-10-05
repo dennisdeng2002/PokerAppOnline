@@ -7,6 +7,7 @@ public class PokerLobby extends Thread{
     //List must be synchronized in order to update size in while loop of run()
     private List<HeadsUpPlayer> players = Collections.synchronizedList(new ArrayList<>());
     private List<HeadsUpPlayer> queuedPlayers = Collections.synchronizedList(new ArrayList<>());
+    private int numOfBots = 0;
 
     public PokerLobby(){}
 
@@ -16,11 +17,21 @@ public class PokerLobby extends Thread{
         while(true){
             if(queuedPlayers.size()>1 && queuedPlayers.get(0).getPlayerName() != null && queuedPlayers.get(1).getPlayerName() != null){
                 setPlayerIDs(queuedPlayers);
-                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0),queuedPlayers.get(1));
+                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0),queuedPlayers.get(1),false);
                 driver.start();
                 //Remove is safer than clear since there is a small possibility
                 //player is added to queue while a new game is starting
                 queuedPlayers.remove(0);
+                queuedPlayers.remove(0);
+            }
+            else if(queuedPlayers.size()!=0 && queuedPlayers.get(0).versusBot && queuedPlayers.get(0).getPlayerName() != null){
+                String botName = "Bot" + numOfBots;
+                numOfBots++;
+                queuedPlayers.get(0).setID(0);
+                queuedPlayers.get(0).setOtherPlayerID(1);
+                PokerBot bot = new PokerBot(botName, 200, 1, 0);
+                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0), bot, true);
+                driver.start();
                 queuedPlayers.remove(0);
             }
 

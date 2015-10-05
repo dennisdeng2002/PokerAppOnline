@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+//Demo used to implement html-javascript-java interface
 public class StockService {
 
     private static Random rnd = new Random();

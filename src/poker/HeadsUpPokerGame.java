@@ -11,7 +11,6 @@ import java.io.*;
 public class HeadsUpPokerGame implements Serializable {
 
     //Constants
-    public static final int STARTING_CASH = 200;
     public static final int BIG_BLIND = 2;
     public static final int SMALL_BLIND = 1;
 
@@ -25,14 +24,16 @@ public class HeadsUpPokerGame implements Serializable {
     public int dealerIndex;
     public ArrayList<HeadsUpPlayer> players;
     public ArrayList<HeadsUpHand> hands;
+    public boolean versusBot;
 
 
     //Instantiate this when a fresh new game starts
-    public HeadsUpPokerGame(int numOfPlayers, HeadsUpPlayer player1, HeadsUpPlayer player2) {
+    public HeadsUpPokerGame(int numOfPlayers, HeadsUpPlayer player1, HeadsUpPlayer player2, boolean versusBot) {
         //Initialize a blank array of hands
         hands = new ArrayList<HeadsUpHand>();
         //Total starting players
         totalPlayers = numOfPlayers;
+        this.versusBot = versusBot;
 
         handNumber = 0;
         sbIndex = 0;
@@ -57,7 +58,9 @@ public class HeadsUpPokerGame implements Serializable {
         gameIsLive = true;
 
         player1.startGameMessage(player2.getPlayerName());
-        player2.startGameMessage(player1.getPlayerName());
+        if(!versusBot){
+            player2.startGameMessage(player1.getPlayerName());
+        }
 
         try{
             Thread.sleep(2500);

@@ -64,6 +64,41 @@ public class HandEvaluator {
 		return idList;
 	}
 
+	//Used for PokerBot equity calculations (HeadsUp)
+	public static ArrayList<Integer> evaluateWinner(Card[] botCards, Card[] opponentCards, Card[] board) {
+
+		//playerStrengths represents the numbering system for each player
+		int[][] playerStrengths = new int[2][5];
+
+		//initialize with all 5 cards of the board
+		Card[] allCards = new Card[7];
+		allCards[0] = board[0];
+		allCards[1] = board[1];
+		allCards[2] = board[2];
+		allCards[3] = board[3];
+		allCards[4] = board[4];
+
+		allCards[5] = botCards[0];
+		allCards[6] = botCards[1];
+
+		ArrayList<Card> allCardz = new ArrayList<Card>(Arrays.asList(allCards));
+
+		sort(allCardz);
+		playerStrengths[0] = determineStrength(allCardz);
+
+		allCards[5] = opponentCards[0];
+		allCards[6] = opponentCards[1];
+
+		allCardz = new ArrayList<Card>(Arrays.asList(allCards));
+
+		sort(allCardz);
+		playerStrengths[1] = determineStrength(allCardz);
+
+		ArrayList <Integer> winnerList = determineWinner(playerStrengths);
+
+		return winnerList;
+	}
+
 	private static ArrayList<Integer> determineWinner(int[][] playerStrengths) {
 		//Allows for ties if players have the same hand
 		ArrayList<Integer> winnerList = new ArrayList<Integer>(playerStrengths.length);

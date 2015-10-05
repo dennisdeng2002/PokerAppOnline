@@ -426,16 +426,47 @@ public class myTests {
 			System.out.println(boards.get(k));
 			System.out.println(Arrays.toString(HandEvaluator.determineStrength(boards.get(k))));
 		}
+		//	For Reference
+		//	STRAIGHTFLUSH = 22;
+		//	QUAD = 21;
+		//	FULLHOUSE = 20;
+		//	FLUSH = 19;
+		//	STRAIGHT = 18;
+		//	TRIPS = 17;
+		//	TWOPAIR = 16;
+		//	PAIR = 15;
+	}
+
+	@Test
+	public void testPokerBot() {
+		PokerBot bot = new PokerBot("Bot1", 200, 0, 1);
+
+		Card[] holeCards = new Card[]{Ah, Ad};
+		Card[] board = new Card[]{Qc, c9, d2, d7, s4};
+		bot.receiveHand(holeCards);
+		//Testing preflop equity (streetIn = 9)
+		System.out.println(bot.calculateEquityTestMethod(board, 9));
+
+		holeCards = new Card[]{Ah, Kd};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 9));
+
+		holeCards = new Card[]{Jc, Tc};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 9));
+
+		holeCards = new Card[]{Jc, Tc};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 10));
+
+		holeCards = new Card[]{Jc, Tc};
+		board = new Card[]{Qc, c9, c8, d7, s4};
+		bot.receiveHand(holeCards);
+		//Testing flop equity (streetIn = 10)
+		System.out.println(bot.calculateEquityTestMethod(board, 10));
+
+
 
 	}
-//	For Reference
-//	STRAIGHTFLUSH = 22;
-//	QUAD = 21;
-//	FULLHOUSE = 20;
-//	FLUSH = 19;
-//	STRAIGHT = 18;
-//	TRIPS = 17;
-//	TWOPAIR = 16;
-//	PAIR = 15;
 
 }

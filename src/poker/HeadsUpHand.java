@@ -2,6 +2,7 @@ package poker;
 
 import javax.swing.*;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -75,6 +76,11 @@ public class HeadsUpHand implements Serializable {
 
     }
 
+    public Card[] getBoard(){
+        return board;
+    }
+
+
 
     public void addToPot(int amount) {
 
@@ -124,14 +130,23 @@ public class HeadsUpHand implements Serializable {
                 if(allInCounter == activePlayers.size()){
                     return;
                 }
-                //Allow other player to spectate passively
-                if(tempActionCounter==0){
-                    game.players.get(1).spectate(this, game, streetIn, "Waiting for other player to act");
-                    game.players.get(1).setTurnToAct(false);
+                if(!game.versusBot){
+                    //Allow other player to spectate passively
+                    if(tempActionCounter==0){
+                        game.players.get(1).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(1).setTurnToAct(false);
+                    }
+                    else{
+                        game.players.get(0).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(0).setTurnToAct(false);
+                    }
                 }
                 else{
-                    game.players.get(0).spectate(this, game, streetIn, "Waiting for other player to act");
-                    game.players.get(1).setTurnToAct(false);
+                    //Allow other player to spectate passively (bot is always second player added)
+                    if(tempActionCounter==1){
+                        game.players.get(0).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(0).setTurnToAct(false);
+                    }
                 }
 
                 game.players.get(tempActionCounter).setTurnToAct(true);
@@ -213,7 +228,12 @@ public class HeadsUpHand implements Serializable {
 
 
     private void startPreFlop() {
-        startStreet(PRE_FLOP, game.actionIndex);
+        if(game.versusBot){
+
+        }
+        else{
+            startStreet(PRE_FLOP, game.actionIndex);
+        }
 
         //Only moves to flop if there are still people in pot
         if(activePlayers.size()!=1){

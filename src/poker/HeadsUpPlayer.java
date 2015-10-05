@@ -1,36 +1,34 @@
-//Players are mutable
-
 package poker;
-
-//import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 import org.eclipse.jetty.websocket.api.Session;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.net.Socket;
 import java.util.*;
 
 public class HeadsUpPlayer extends Thread implements Serializable{
 
-    private String name;
-    private int money;
-    private Card [] holeCards;
-    private boolean folded;
-    private int streetMoney;
+    protected String name;
+    protected int money;
+    protected Card [] holeCards;
+    protected boolean folded;
+    protected int streetMoney;
     public boolean endAction;
     public boolean isAllIn;
     //ID is essentially their seat number
-    private int id;
-    private int otherPlayerID;
-    private Session session;
-    private ArrayList<String> messages;
-    private String recievedMessage;
-    private String response;
-    private boolean turnToAct;
+    protected int id;
+    protected int otherPlayerID;
+    protected Session session;
+    protected ArrayList<String> messages;
+    protected String recievedMessage;
+    protected String response;
+    protected boolean turnToAct;
     public boolean isPlaying;
     public boolean isConnected;
-    private HeadsUpPokerGame game;
+    public boolean versusBot;
+    protected HeadsUpPokerGame game;
+
+    //Default Constructor
+    public HeadsUpPlayer(){}
 
     public HeadsUpPlayer(String name, int money, int id, Session session, int otherPlayerID) {
 
@@ -99,7 +97,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
 
-    private void spendMoney(int amount) {
+    protected void spendMoney(int amount) {
 
         money -= amount;
 

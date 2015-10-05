@@ -8,6 +8,7 @@ import poker.HeadsUpPlayer;
 
 import java.util.HashSet;
 
+//Demo used to implement html-javascript-java interface
 public class StockServiceServer {
 
     public static void main(String[] args) throws Exception{
