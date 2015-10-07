@@ -109,7 +109,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
 
     }
 
-    private void fold() {
+    protected void fold() {
 
         folded = true;
 
@@ -191,7 +191,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
                                 isCorrect = true;
-                                game.players.get(otherPlayerID).addMessage(name + " puts you all in");
+                                if(!versusBot){
+                                    game.players.get(otherPlayerID).addMessage(name + " puts you all in");
+                                }
                                 //Increase all in counter so that
                                 //when other player calls further actions are skipped
                                 hand.increaseAllInCounter();
@@ -205,7 +207,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 isAllIn = true;
                                 hand.increaseAllInCounter();
                                 isCorrect = true;
-                                game.players.get(otherPlayerID).addMessage(name + " is all in");
+                                if(!versusBot){
+                                    game.players.get(otherPlayerID).addMessage(name + " is all in");
+                                }
                             } else if(betSize < 2*minimumBet || betSize == 0) {
                                 addMessage("Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)
@@ -217,7 +221,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
                                 isCorrect = true;
-                                game.players.get(otherPlayerID).addMessage(name + " bet " + betSize);
+                                if(!versusBot){
+                                    game.players.get(otherPlayerID).addMessage(name + " bet " + betSize);
+                                }
                             }
                             break;
                         }
@@ -234,7 +240,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     } else{
                         isCorrect = true;
                         betSize = 0;
-                        game.players.get(otherPlayerID).addMessage(name + " checked");
+                        if(!versusBot){
+                            game.players.get(otherPlayerID).addMessage(name + " checked");
+                        }
                     }
                 }
                 else if(action.equalsIgnoreCase("Call")) {
@@ -252,7 +260,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         hand.increaseAllInCounter();
                         isCorrect = true;
                         if(streetIn!=12){
-                            game.players.get(otherPlayerID).addMessage(name + " is all in");
+                            if(!versusBot){
+                                game.players.get(otherPlayerID).addMessage(name + " is all in");
+                            }
                         }
                     }
                     else{
@@ -262,7 +272,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         hand.addToPot(minimumBet - streetMoney);
                         isCorrect = true;
                         betSize = minimumBet;
-                        game.players.get(otherPlayerID).addMessage(name + " called " + betSize);
+                        if(!versusBot){
+                            game.players.get(otherPlayerID).addMessage(name + " called " + betSize);
+                        }
                     }
                 }
                 else if(action.equalsIgnoreCase("Fold")) {

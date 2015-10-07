@@ -465,7 +465,11 @@ public class myTests {
 		//Testing flop equity (streetIn = 10)
 		System.out.println(bot.calculateEquityTestMethod(board, 10));
 
-
+		holeCards = new Card[]{c7, c6};
+		board = new Card[]{c5, Ad, c8, d7, s4};
+		bot.receiveHand(holeCards);
+		//Testing flop equity (streetIn = 10)
+		System.out.println(bot.calculateEquityTestMethod(board, 10));
 
 	}
 

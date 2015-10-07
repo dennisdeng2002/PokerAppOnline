@@ -80,7 +80,9 @@ public class HeadsUpHand implements Serializable {
         return board;
     }
 
-
+    public int getPot(){
+        return pot;
+    }
 
     public void addToPot(int amount) {
 
@@ -228,13 +230,8 @@ public class HeadsUpHand implements Serializable {
 
 
     private void startPreFlop() {
-        if(game.versusBot){
 
-        }
-        else{
-            startStreet(PRE_FLOP, game.actionIndex);
-        }
-
+        startStreet(PRE_FLOP, game.actionIndex);
         //Only moves to flop if there are still people in pot
         if(activePlayers.size()!=1){
             startFlop();
@@ -324,9 +321,13 @@ public class HeadsUpHand implements Serializable {
                 }
             }
         }
-
-        game.players.get(0).spectate(this, game, RIVER, winnerMessage);
-        game.players.get(1).spectate(this, game, RIVER, winnerMessage);
+        if(!game.versusBot){
+            game.players.get(0).spectate(this, game, RIVER, winnerMessage);
+            game.players.get(1).spectate(this, game, RIVER, winnerMessage);
+        }
+        else{
+            game.players.get(0).spectate(this, game, RIVER, winnerMessage);
+        }
         //Pause game for 5000ms (will either move on to next hand or end)
         try{
             Thread.sleep(5000);
@@ -382,8 +383,13 @@ public class HeadsUpHand implements Serializable {
         String winnerMessage = game.players.get(loserID).getPlayerName() + " folded, "
                 + game.players.get(winnerID).getPlayerName() + " is the winner";
 
-        game.players.get(0).spectate(this, game, streetIn, winnerMessage);
-        game.players.get(1).spectate(this, game, streetIn, winnerMessage);
+        if(!game.versusBot){
+            game.players.get(0).spectate(this, game, streetIn, winnerMessage);
+            game.players.get(1).spectate(this, game, streetIn, winnerMessage);
+        }
+        else{
+            game.players.get(0).spectate(this, game, streetIn, winnerMessage);
+        }
         //Pause game for 2500ms
         try{
             Thread.sleep(2500);

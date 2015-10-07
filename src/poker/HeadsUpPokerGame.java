@@ -72,6 +72,14 @@ public class HeadsUpPokerGame implements Serializable {
 
     }
 
+    public int getBigBlind(){
+        return BIG_BLIND;
+    }
+
+    public int getSmallBlind(){
+        return SMALL_BLIND;
+    }
+
 
     public void startNewHand() {
 
