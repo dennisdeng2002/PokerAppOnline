@@ -78,6 +78,23 @@ public class myTests {
 
 	public ArrayList<Card> diamonds = new ArrayList<>(Arrays.asList(Ad, Kd, Qd, Jd, Td, d9, d8, d7, d6, d5, d4, d3, d2));
 
+	public ArrayList<Card> aces = new ArrayList<>(Arrays.asList(Ah, As, Ac, Ad));
+	public ArrayList<Card> kings = new ArrayList<>(Arrays.asList(Kh, Ks, Kc, Kd));
+	public ArrayList<Card> queens = new ArrayList<>(Arrays.asList(Qh, Qs, Qc, Qd));
+	public ArrayList<Card> jacks = new ArrayList<>(Arrays.asList(Jh, Js, Jc, Jd));
+	public ArrayList<Card> tens = new ArrayList<>(Arrays.asList(Th, Ts, Tc, Td));
+	public ArrayList<Card> nines = new ArrayList<>(Arrays.asList(h9, s9, c9, d9));
+	public ArrayList<Card> eights = new ArrayList<>(Arrays.asList(h8, s8, c8, d8));
+	public ArrayList<Card> sevens = new ArrayList<>(Arrays.asList(h7, s7, c7, d7));
+	public ArrayList<Card> sixes = new ArrayList<>(Arrays.asList(h6, s6, c6, d6));
+	public ArrayList<Card> fives = new ArrayList<>(Arrays.asList(h5, s5, c5, d5));
+	public ArrayList<Card> fours = new ArrayList<>(Arrays.asList(h4, s4, c4, d4));
+	public ArrayList<Card> threes = new ArrayList<>(Arrays.asList(h3, s3, c3, d3));
+	public ArrayList<Card> deuces = new ArrayList<>(Arrays.asList(h2, s2, c2, d2));
+
+
+
+
 	@Test
 	public void testBasicDeck() {
 
@@ -443,33 +460,37 @@ public class myTests {
 
 		Card[] holeCards = new Card[]{Ah, Ad};
 		Card[] board = new Card[]{Qc, c9, d2, d7, s4};
+		double range = 0.1;
+
+		RangeMatrix matrix = new RangeMatrix();
+
 		bot.receiveHand(holeCards);
 		//Testing preflop equity (streetIn = 9)
-		System.out.println(bot.calculateEquityTestMethod(board, 9));
+//		System.out.println(bot.calculateEquityTestMethod(board, range, 9));
 
-		holeCards = new Card[]{Ah, Kd};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 9));
-
-		holeCards = new Card[]{Jc, Tc};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 9));
-
-		holeCards = new Card[]{Jc, Tc};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 10));
-
-		holeCards = new Card[]{Jc, Tc};
-		board = new Card[]{Qc, c9, c8, d7, s4};
-		bot.receiveHand(holeCards);
-		//Testing flop equity (streetIn = 10)
-		System.out.println(bot.calculateEquityTestMethod(board, 10));
-
-		holeCards = new Card[]{c7, c6};
-		board = new Card[]{c5, Ad, c8, d7, s4};
-		bot.receiveHand(holeCards);
-		//Testing flop equity (streetIn = 10)
-		System.out.println(bot.calculateEquityTestMethod(board, 10));
+//		holeCards = new Card[]{Ah, Kd};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 9));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 9));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 10));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		board = new Card[]{Qc, c9, c8, d7, s4};
+//		bot.receiveHand(holeCards);
+//		//Testing flop equity (streetIn = 10)
+//		System.out.println(bot.calculateEquityTestMethod(board, 10));
+//
+//		holeCards = new Card[]{c7, c6};
+//		board = new Card[]{c5, Ad, c8, d7, s4};
+//		bot.receiveHand(holeCards);
+//		//Testing flop equity (streetIn = 10)
+//		System.out.println(bot.calculateEquityTestMethod(board, 10));
 
 	}
 

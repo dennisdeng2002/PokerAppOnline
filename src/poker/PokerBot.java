@@ -185,7 +185,7 @@ public class PokerBot extends HeadsUpPlayer{
     }
 
 
-    public double calculateEquityTestMethod(Card[] testBoard, int streetIn){
+    public double calculateEquityTestMethod(Card[] testBoard, double range, int streetIn){
         playerScore = 0;
         opponentScore = 0;
         for(int i = 0; i<10000; i++){
@@ -221,10 +221,15 @@ public class PokerBot extends HeadsUpPlayer{
                     board[3] = testBoard[3]; board[4] = testBoard[4];
                     break;
             }
-            //Randomly deal cards to opponent
-            opponentCards = deck.deal(2);
+            if(range == 0.0){
+                //Randomly deal cards to opponent
+                this.opponentCards = deck.deal(2);
+            }
+            else{
+                this.opponentCards = getCardsInRange(range);
+            }
             //Increment winner based on hand evaluation
-            winners = HandEvaluator.evaluateWinner(holeCards, opponentCards, board);
+            winners = HandEvaluator.evaluateWinner(holeCards, this.opponentCards, board);
             //Split pot (tie)
             if(winners.size()==2){
                 playerScore++;
@@ -241,6 +246,10 @@ public class PokerBot extends HeadsUpPlayer{
         //return calculated equity = hands won by player / total hands
         System.out.println((playerScore) / (playerScore + opponentScore));
         return (playerScore) / (playerScore + opponentScore);
+    }
+
+    public Card[] getCardsInRange(double range){
+        return null;
     }
 
 }
