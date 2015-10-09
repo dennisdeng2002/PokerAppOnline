@@ -21,7 +21,7 @@ public class Deck {
             }
         }
     }
-	
+
 	//Copy constructor. Instantiates an aliased new deck of cards. 
 	public Deck(Deck other) {
 		
@@ -116,6 +116,7 @@ public class Deck {
 			for(int j = 0; j < cards.size(); j++){
 				if(cardsForRemoval[i].equals(cards.get(j))){
 					cards.remove(j);
+					break;
 				}
 			}
 		}

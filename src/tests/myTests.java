@@ -465,29 +465,29 @@ public class myTests {
 		//Testing preflop equity (streetIn = 9)
 		System.out.println(bot.calculateEquityTestMethod(board, 0.2, 9));
 
-		holeCards = new Card[]{Ah, Kd};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 0.7, 9));
-
-		holeCards = new Card[]{Jc, Tc};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 0.1, 9));
-
-		holeCards = new Card[]{Jc, Tc};
-		bot.receiveHand(holeCards);
-		System.out.println(bot.calculateEquityTestMethod(board, 0.05, 10));
-
-		holeCards = new Card[]{Jc, Tc};
-		board = new Card[]{Qc, c9, c8, d7, s4};
-		bot.receiveHand(holeCards);
-		//Testing flop equity (streetIn = 10)
-		System.out.println(bot.calculateEquityTestMethod(board, 1.4, 10));
-
-		holeCards = new Card[]{c7, c6};
-		board = new Card[]{c5, Ad, c8, d7, s4};
-		bot.receiveHand(holeCards);
-		//Testing flop equity (streetIn = 10)
-		System.out.println(bot.calculateEquityTestMethod(board, 9999, 10));
+//		holeCards = new Card[]{Ah, Kd};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 0.7, 9));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 0.1, 9));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		bot.receiveHand(holeCards);
+//		System.out.println(bot.calculateEquityTestMethod(board, 0.05, 10));
+//
+//		holeCards = new Card[]{Jc, Tc};
+//		board = new Card[]{Qc, c9, c8, d7, s4};
+//		bot.receiveHand(holeCards);
+//		//Testing flop equity (streetIn = 10)
+//		System.out.println(bot.calculateEquityTestMethod(board, 1.4, 10));
+//
+//		holeCards = new Card[]{c7, c6};
+//		board = new Card[]{c5, Ad, c8, d7, s4};
+//		bot.receiveHand(holeCards);
+//		//Testing flop equity (streetIn = 10)
+//		System.out.println(bot.calculateEquityTestMethod(board, 9999, 10));
 
 	}
 

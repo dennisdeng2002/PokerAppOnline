@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style type="text/css">
+
+        h1 {
+            text-align: center;
+            font-family: Georgia;
+            font-size: 30px;
+        }
+        input {
+            width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        textarea {
+            width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+
     <meta charset="UTF-8">
     <title></title>
 </head>
 <h1>PokerApp</h1>
 <script src="PokerClient.js"></script>
-<input type="text" id="inputField"
-       onkeydown="if(event.keyCode==13)
-       {sendToServer(document.getElementById('inputField'))}">
-<br/><br/>
+
 <textarea id="messageArea" rows="10" cols="40"></textarea>
+<br/><br/>
+<input type="text" id="inputField" onkeydown="if(event.keyCode==13)
+       {sendToServer(document.getElementById('inputField'))}">
+
+
+
+
+</html>
 </body>
 </html>

@@ -10,10 +10,10 @@ import java.util.Scanner;
 public class HeadsUpHand implements Serializable {
 
     private static final int NUMBER_OF_SHUFFLES = 3;
-    private static final int PRE_FLOP = 9;
-    private static final int FLOP = 10;
-    private static final int TURN = 11;
-    private static final int RIVER = 12;
+    public static final int PRE_FLOP = 9;
+    public static final int FLOP = 10;
+    public static final int TURN = 11;
+    public static final int RIVER = 12;
 
     private int pot;
     private int allInCounter;

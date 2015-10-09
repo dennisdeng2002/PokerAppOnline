@@ -217,18 +217,18 @@ public class PokerBot extends HeadsUpPlayer{
             deck.shuffle();
 
             switch (streetIn){
-                case 9:
+                case HeadsUpHand.PRE_FLOP:
                     //Randomly initialize board
                     board = deck.deal(5);
                     break;
-                case 10:
+                case HeadsUpHand.FLOP:
                     deck.removeCards(new Card[]{testBoard[0], testBoard[1], testBoard[2]});
                     //Set first three cards as board from current Hand
                     board[0] = testBoard[0]; board[1] = testBoard[1]; board[2] = testBoard[2];
                     //Randomly initialize rest of board
                     board[3] = deck.deal(1)[0]; board[4] = deck.deal(1)[0];
                     break;
-                case 11:
+                case HeadsUpHand.TURN:
                     deck.removeCards(new Card[]{testBoard[0], testBoard[1], testBoard[2], testBoard[3]});
                     //Set first four cards as board from current Hand
                     board[0] = testBoard[0]; board[1] = testBoard[1]; board[2] = testBoard[2];
@@ -236,7 +236,7 @@ public class PokerBot extends HeadsUpPlayer{
                     //Randomly initialize rest of board
                     board[4] = deck.deal(1)[0];
                     break;
-                case 12:
+                case HeadsUpHand.RIVER:
                     deck.removeCards(new Card[]{testBoard[0], testBoard[1], testBoard[2], testBoard[3], testBoard[4]});
                     //Set all five cards as board from current Hand
                     board[0] = testBoard[0]; board[1] = testBoard[1]; board[2] = testBoard[2];
