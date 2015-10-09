@@ -30,9 +30,9 @@
 <h1>PokerApp</h1>
 <script src="PokerClient.js"></script>
 
-<textarea id="messageArea" rows="10" cols="40"></textarea>
+<textarea id="messageArea" rows="10" cols="40" readonly></textarea>
 <br/><br/>
-<input type="text" id="inputField" onkeydown="if(event.keyCode==13)
+<input type="text" placeholder="User Action:" id="inputField" onkeydown="if(event.keyCode==13)
        {sendToServer(document.getElementById('inputField'))}">
 
 
