@@ -458,39 +458,36 @@ public class myTests {
 	public void testPokerBot() {
 		PokerBot bot = new PokerBot("Bot1", 200, 0, 1);
 
-		Card[] holeCards = new Card[]{Ah, Ad};
+		Card[] holeCards = new Card[]{d5, h3};
 		Card[] board = new Card[]{Qc, c9, d2, d7, s4};
-		double range = 0.1;
-
-		RangeMatrix matrix = new RangeMatrix();
 
 		bot.receiveHand(holeCards);
 		//Testing preflop equity (streetIn = 9)
-//		System.out.println(bot.calculateEquityTestMethod(board, range, 9));
+		System.out.println(bot.calculateEquityTestMethod(board, 0.2, 9));
 
-//		holeCards = new Card[]{Ah, Kd};
-//		bot.receiveHand(holeCards);
-//		System.out.println(bot.calculateEquityTestMethod(board, 9));
-//
-//		holeCards = new Card[]{Jc, Tc};
-//		bot.receiveHand(holeCards);
-//		System.out.println(bot.calculateEquityTestMethod(board, 9));
-//
-//		holeCards = new Card[]{Jc, Tc};
-//		bot.receiveHand(holeCards);
-//		System.out.println(bot.calculateEquityTestMethod(board, 10));
-//
-//		holeCards = new Card[]{Jc, Tc};
-//		board = new Card[]{Qc, c9, c8, d7, s4};
-//		bot.receiveHand(holeCards);
-//		//Testing flop equity (streetIn = 10)
-//		System.out.println(bot.calculateEquityTestMethod(board, 10));
-//
-//		holeCards = new Card[]{c7, c6};
-//		board = new Card[]{c5, Ad, c8, d7, s4};
-//		bot.receiveHand(holeCards);
-//		//Testing flop equity (streetIn = 10)
-//		System.out.println(bot.calculateEquityTestMethod(board, 10));
+		holeCards = new Card[]{Ah, Kd};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 0.7, 9));
+
+		holeCards = new Card[]{Jc, Tc};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 0.1, 9));
+
+		holeCards = new Card[]{Jc, Tc};
+		bot.receiveHand(holeCards);
+		System.out.println(bot.calculateEquityTestMethod(board, 0.05, 10));
+
+		holeCards = new Card[]{Jc, Tc};
+		board = new Card[]{Qc, c9, c8, d7, s4};
+		bot.receiveHand(holeCards);
+		//Testing flop equity (streetIn = 10)
+		System.out.println(bot.calculateEquityTestMethod(board, 1.4, 10));
+
+		holeCards = new Card[]{c7, c6};
+		board = new Card[]{c5, Ad, c8, d7, s4};
+		bot.receiveHand(holeCards);
+		//Testing flop equity (streetIn = 10)
+		System.out.println(bot.calculateEquityTestMethod(board, 9999, 10));
 
 	}
 

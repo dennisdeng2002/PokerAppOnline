@@ -16,7 +16,9 @@ public class PokerBot extends HeadsUpPlayer{
     private double equity;
     private int betSize;
     private Random random;
-    private int aggressionFactor;
+    private RangeMatrix matrix;
+    Card[] cardsInRange;
+    private int limit;
 
     public PokerBot(String name, int money, int id, int otherPlayerID){
         this.name = name;
@@ -28,9 +30,10 @@ public class PokerBot extends HeadsUpPlayer{
         turnToAct = true;
         this.otherPlayerID = otherPlayerID;
         random = new Random();
+        matrix = new RangeMatrix();
     }
 
-    public int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
+    public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
         //PREFLOP = 9, FLOP = 10, TURN = 11, RIVER = 12
         switch(streetIn){
             case 9:
@@ -53,15 +56,15 @@ public class PokerBot extends HeadsUpPlayer{
     }
 
     public int actionPreFlop(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        equity = calculateEquity(hand, streetIn);
+        equity = calculateEquity(hand, 0.3, streetIn);
 
         //Raise
-        if(equity >= 0.57){
+        if(equity >= 0.5){
             betSize = bet(minimumBet, hand, game);
             return betSize;
         }
         //Check/Call
-        else if (equity < 0.57 && equity>= 0.4){
+        else if (equity < 0.50 && equity>= 0.4){
             //Determine if player called (minimum bet will equal the BB) and whether pokerBot is the BB
             if(minimumBet == game.getBigBlind() && game.bbIndex == id){
                 betSize = minimumBet;
@@ -75,7 +78,7 @@ public class PokerBot extends HeadsUpPlayer{
         }
         //Fold
         else{
-            if(minimumBet==0){
+            if(minimumBet == game.getBigBlind() && game.bbIndex == id){
                 betSize = minimumBet;
                 game.players.get(otherPlayerID).addMessage(this.name + " checked");
             }
@@ -89,19 +92,19 @@ public class PokerBot extends HeadsUpPlayer{
 
     public int actionFlop(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
         //Further street methods have not been implemented (bot will always fold)
-        equity = calculateEquity(hand, streetIn);
+        equity = calculateEquity(hand, 0.1, streetIn);
         this.fold();
         return 0;
     }
 
     public int actionTurn(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        equity = calculateEquity(hand, streetIn);
+        equity = calculateEquity(hand, 0.1, streetIn);
         this.fold();
         return 0;
     }
 
     public int actionRiver(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        equity = calculateEquity(hand, streetIn);
+        equity = calculateEquity(hand, 0.1, streetIn);
         this.fold();
         return 0;
     }
@@ -127,11 +130,17 @@ public class PokerBot extends HeadsUpPlayer{
         return betSize;
     }
 
-    //Calculates equity by simulating results over 10000 hands
-    //Currently only implemented for equity against a random hand
-    public double calculateEquity(HeadsUpHand hand, int streetIn){
+    //Calculates equity by simulating results over 100000n^2 hands, where n = limit
+    //Worst case run-time is around 3s (100000 * 16^2 hand simulations)
+    public double calculateEquity(HeadsUpHand hand, double range, int streetIn){
         playerScore = 0;
         opponentScore = 0;
+        //Limit is used to determine how many cards are included in the simulation for the opponent
+        limit = (int)Math.ceil(Math.sqrt(range*169));
+        //Limit is constrained between 1 and 13 (inclusive)
+        if(limit==0){limit=1;}
+        else if(limit>13){limit=13;}
+
         for(int i = 0; i<10000; i++){
             //Create a new deck every simulation, remove holeCards from deck, and then shuffle
             deck = new Deck();
@@ -165,29 +174,42 @@ public class PokerBot extends HeadsUpPlayer{
                     board[2] = hand.getBoard()[3]; board[4] = hand.getBoard()[4];
                     break;
             }
-            //Randomly deal cards to opponent
-            opponentCards = deck.deal(2);
-            //Increment winner based on hand evaluation, return calculated equity = hands won by player / total hands
-            winners = HandEvaluator.evaluateWinner(holeCards, opponentCards, board);
-            if(winners.size()==2){
-                playerScore++;
-                opponentScore++;
-            }
-            else if(winners.get(0)==0){
-                playerScore++;
-            }
-            else{
-                opponentScore++;
+            //This loops through all cards in range and evaluates them versus current simulated board
+            //Outer loop at the top iterates through different boards, thus allowing 100000 * limit^2 simulations
+            for(int j = 0; j < limit; j++){
+                for(int k = 0; k < limit; k++){
+                    //Range double represents percentage of hands (i.e. 0.01 -> top 1% hands = AA, KK)
+                    opponentCards = getCardsInRange(j, k);
+                    deck.removeCards(opponentCards);
+                    //Increment winner based on hand evaluation
+                    winners = HandEvaluator.evaluateWinner(holeCards, opponentCards, board);
+                    //Split pot (tie)
+                    if(winners.size()==2){
+                        playerScore++;
+                        opponentScore++;
+                    }
+                    //If winner is first player returned (pokerBot) ++
+                    else if(winners.get(0)==0){
+                        playerScore++;
+                    }
+                    else{
+                        opponentScore++;
+                    }
+                }
             }
         }
         System.out.println((playerScore) / (playerScore + opponentScore));
         return (playerScore) / (playerScore + opponentScore);
     }
 
-
     public double calculateEquityTestMethod(Card[] testBoard, double range, int streetIn){
         playerScore = 0;
         opponentScore = 0;
+        //Limit is used to determine how many cards are included in the simulation for the opponent
+        limit = (int)Math.ceil(Math.sqrt(range*169));
+        if(limit==0){limit=1;}
+        else if(limit>13){limit=13;}
+
         for(int i = 0; i<10000; i++){
             //Create a new deck every simulation
             deck = new Deck();
@@ -221,35 +243,41 @@ public class PokerBot extends HeadsUpPlayer{
                     board[3] = testBoard[3]; board[4] = testBoard[4];
                     break;
             }
-            if(range == 0.0){
-                //Randomly deal cards to opponent
-                this.opponentCards = deck.deal(2);
-            }
-            else{
-                this.opponentCards = getCardsInRange(range);
-            }
-            //Increment winner based on hand evaluation
-            winners = HandEvaluator.evaluateWinner(holeCards, this.opponentCards, board);
-            //Split pot (tie)
-            if(winners.size()==2){
-                playerScore++;
-                opponentScore++;
-            }
-            //If winner is first player returned (pokerBot)
-            else if(winners.get(0)==0){
-                playerScore++;
-            }
-            else{
-                opponentScore++;
+            //This loops through all cards in range and evaluates them versus current simulated board
+            //Outer loop at the top iterates through different boards, thus allowing 100000 * limit^2 simulations
+            for(int j = 0; j < limit; j++){
+                for(int k = 0; k < limit; k++){
+                    //Range double represents percentage of hands (i.e. 0.01 -> top 1% hands = AA, KK)
+                    opponentCards = getCardsInRange(j, k);
+                    deck.removeCards(opponentCards);
+                    //Increment winner based on hand evaluation
+                    winners = HandEvaluator.evaluateWinner(holeCards, opponentCards, board);
+                    //Split pot (tie)
+                    if(winners.size()==2){
+                        playerScore++;
+                        opponentScore++;
+                    }
+                    //If winner is first player returned (pokerBot) ++
+                    else if(winners.get(0)==0){
+                        playerScore++;
+                    }
+                    else{
+                        opponentScore++;
+                    }
+                }
             }
         }
         //return calculated equity = hands won by player / total hands
-        System.out.println((playerScore) / (playerScore + opponentScore));
         return (playerScore) / (playerScore + opponentScore);
     }
 
-    public Card[] getCardsInRange(double range){
-        return null;
+    public Card[] getCardsInRange(int j, int k){
+        //cardsInRange are returned from a rectangular matrix based on the limit = sqrt(range * 169)
+        //Ex. a range value of 0.025 represents roughly 1/40 of all 169 card combinations, or a 2x2 cutout of the
+        //top-left end of the matrix (AA, AKo, AKs, KK). While this doesn't represent how a typical range functions,
+        //it serves as a starting representation of how pokerBot will evaluate his hand against a range.
+        cardsInRange = new Card[]{matrix.matrix[j][k][0], matrix.matrix[j][k][1]};
+        return cardsInRange;
     }
 
 }

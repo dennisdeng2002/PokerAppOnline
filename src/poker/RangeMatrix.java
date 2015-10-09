@@ -88,7 +88,7 @@ public class RangeMatrix {
     public Card[][][] matrix;
 
     //Range matrix only stores one copy of each type of hand (AhAs as opposed to all 6 combos of Aces)
-    //This may lead to minor inaccuracies during the equity calculation but allows for easier implementation and
+    //This may lead to minor inaccuracies (usually less than 3%) during the equity calculation but allows for easier implementation and
     //faster overall equity calculation
     public RangeMatrix(){
         constructCardRanks();
@@ -100,13 +100,13 @@ public class RangeMatrix {
         }
         //Fill upper half with suited cards
         for(int j = 0; j < 13; j++){
-            for(int k = j+1; k<12; k++){
+            for(int k = j+1; k<13; k++){
                 matrix[j][k] = new Card[]{cardRanks.get(j).get(0), cardRanks.get(k).get(0)};
             }
         }
         //Fill lower half with unsuited cards
         for(int j = 0; j < 13; j++){
-            for(int k = j+1; k<12; k++){
+            for(int k = j+1; k<13; k++){
                 matrix[k][j] = new Card[]{cardRanks.get(j).get(0), cardRanks.get(k).get(1)};
             }
         }
@@ -127,6 +127,5 @@ public class RangeMatrix {
         cardRanks.add(fours);
         cardRanks.add(threes);
         cardRanks.add(deuces);
-
     }
 }
