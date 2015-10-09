@@ -16,7 +16,7 @@ public class PokerWebSocket {
     @OnWebSocketConnect
     public void handleConnect (org.eclipse.jetty.websocket.api.Session session) {
         player = new HeadsUpPlayer(null, 200, -1, session, -1);
-        player.versusBot = true;
+        player.versusBot = false;
         player.start();
         PokerServer.lobby.addPlayer(player);
         System.out.println("Client connected...");

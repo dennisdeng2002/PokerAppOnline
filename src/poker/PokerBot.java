@@ -61,7 +61,6 @@ public class PokerBot extends HeadsUpPlayer{
         //Raise
         if(equity >= 0.5){
             betSize = bet(minimumBet, hand, game);
-            return betSize;
         }
         //Check/Call
         else if (equity < 0.50 && equity>= 0.4){
@@ -74,7 +73,6 @@ public class PokerBot extends HeadsUpPlayer{
             else{
                 betSize = call(minimumBet, hand, game);
             }
-            return betSize;
         }
         //Fold
         else{
@@ -86,27 +84,107 @@ public class PokerBot extends HeadsUpPlayer{
                 betSize = 0;
                 this.fold();
             }
-            return betSize;
         }
+        return betSize;
     }
 
     public int actionFlop(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        //Further street methods have not been implemented (bot will always fold)
-        equity = calculateEquity(hand, 0.1, streetIn);
-        this.fold();
-        return 0;
+        equity = calculateEquity(hand, 0.3, streetIn);
+
+        //Raise
+        if(equity >= 0.5){
+            betSize = bet(minimumBet, hand, game);
+        }
+        //Check/Call
+        else if (equity < 0.50 && equity>= 0.4){
+            //Determine if player called (minimum bet will equal the BB) and whether pokerBot is the BB
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            //Otherwise player must have raised/bet
+            else{
+                betSize = call(minimumBet, hand, game);
+            }
+        }
+        //Fold
+        else{
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            else{
+                betSize = 0;
+                this.fold();
+            }
+        }
+        return betSize;
     }
 
     public int actionTurn(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        equity = calculateEquity(hand, 0.1, streetIn);
-        this.fold();
-        return 0;
+        equity = calculateEquity(hand, 0.3, streetIn);
+
+        //Raise
+        if(equity >= 0.5){
+            betSize = bet(minimumBet, hand, game);
+        }
+        //Check/Call
+        else if (equity < 0.50 && equity>= 0.4){
+            //Determine if player called (minimum bet will equal the BB) and whether pokerBot is the BB
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            //Otherwise player must have raised/bet
+            else{
+                betSize = call(minimumBet, hand, game);
+            }
+        }
+        //Fold
+        else{
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            else{
+                betSize = 0;
+                this.fold();
+            }
+        }
+        return betSize;
     }
 
     public int actionRiver(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn){
-        equity = calculateEquity(hand, 0.1, streetIn);
-        this.fold();
-        return 0;
+        equity = calculateEquity(hand, 0.3, streetIn);
+
+        //Raise
+        if(equity >= 0.5){
+            betSize = bet(minimumBet, hand, game);
+        }
+        //Check/Call
+        else if (equity < 0.50 && equity>= 0.4){
+            //Determine if player called (minimum bet will equal the BB) and whether pokerBot is the BB
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            //Otherwise player must have raised/bet
+            else{
+                betSize = call(minimumBet, hand, game);
+            }
+        }
+        //Fold
+        else{
+            if(minimumBet == 0){
+                betSize = minimumBet;
+                game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            }
+            else{
+                betSize = 0;
+                this.fold();
+            }
+        }
+        return betSize;
     }
 
     public int bet(int minimumBet, HeadsUpHand hand, HeadsUpPokerGame game){
@@ -123,6 +201,7 @@ public class PokerBot extends HeadsUpPlayer{
     }
 
     public int call(int minimumBet, HeadsUpHand hand, HeadsUpPokerGame game){
+        System.out.println(minimumBet);
         betSize = minimumBet;
         hand.addToPot(minimumBet - streetMoney);
         spendMoney(minimumBet - streetMoney);
