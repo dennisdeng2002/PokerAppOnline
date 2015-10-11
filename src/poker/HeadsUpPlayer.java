@@ -398,12 +398,16 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         }
     }
 
+    //Called by Hand class right before a new hand is called
     public void clearStreetInConsole() {
-        messages.add("clear");
+        messages.add("clear"); //"clear" is a special format handled by client side
         send();
         clearMessages();
     }
 
+    //updated frequently throughout the hand.
+    //chipsp and chipso are special string formats handled by client side.
+    //p for player and o for opponent
     public void addChipsToMessage() {
         messages.add("chipsp" + this.money);
         messages.add("chipso" + game.players.get(otherPlayerID).getMoney());
@@ -411,12 +415,18 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         game.players.get(otherPlayerID).addMessage("chipso" + this.money);
     }
 
+    //displays you hole cards when a hand starts
+    //"cardsp" is a special string format handled by client side
     public void displayHoleCards() {
         messages.add("cardsp" + holeCards[0] + " " + holeCards[1]);
         send();
         clearMessages();
     }
 
+    //called right before a hand starts
+    //player names will never change once it is set so maybe it is redundant
+    //to keep sending their names every time we start a hand
+    //however, we need to update chips before every hand
     public void initializePlayerDisplays(HeadsUpPlayer player, HeadsUpPlayer opponent) {
         messages.add("namep" + player.name);
         messages.add("nameo" + opponent.name);

@@ -13,7 +13,10 @@ webSocket.onclose = function(){
 }
 
 //These are messages received from the server
-//received from java(?)
+//received from java
+//the conditionals inside this method look for special string formats
+//produced by the server-side... if none of those "special cases" are met,
+//the message will be treated normally and added to the message area.
 webSocket.onmessage = function(message){
     var evt = message.data;
     if (evt.substring(0,5) == "chips") {
@@ -83,6 +86,8 @@ function sendToServer(message){
     document.getElementById("inputField").value = "";
 }
 
+//This function is called right before a new Hand is initiated. Clears out
+//the display board of the street cards
 function clearStreetConsole() {
     document.getElementById("street").innerHTML = "";
     document.getElementById("card1").innerHTML = "";
@@ -110,11 +115,13 @@ function displayCards(cards) {
     var colorOfSecondCard = determineCardColor(cards.charAt(10));
     var symbolOfFirstSuit = determineSuitSymbol(cards.charAt(7));
     var symbolOfSecondSuit = determineSuitSymbol(cards.charAt(10));
+    //serverside will never send an opponent's holecards
     if (cards.charAt(5) == 'o') {
         document.getElementById("opponentCards").innerHTML = cards.substring(6,cards.length);
+
+        //but it will send our cards every time a hand is dealt
     } else if (cards.charAt(5) == 'p') {
-        //document.getElementById("playerCards").innerHTML = cards.substring(6,cards.length);
-        //lay out the text
+        //lay out the text 1 by 1
         document.getElementById("playerFirstCardNum").innerHTML = cards.charAt(6);
         document.getElementById("playerFirstCardSuit").innerHTML = symbolOfFirstSuit;
         document.getElementById("playerSecondCardNum").innerHTML = cards.charAt(9);
@@ -128,36 +135,41 @@ function displayCards(cards) {
     }
 }
 
-
+//just prints PREFLOP to the street element
 function displayPreflop(preflop) {
     document.getElementById("street").innerHTML = "PREFLOP";
 }
 
 //pre-condition: flop is formatted as: FLOP[5s, 4d, Kd]
 function displayFlop(flop) {
+    //get card numerals
     var card1 = flop.charAt(5);
     var card2 = flop.charAt(9);
     var card3 = flop.charAt(13);
 
+    //get card colors
     var card1Color = determineCardColor(flop.charAt(6));
     var card2Color = determineCardColor(flop.charAt(10));
     var card3Color = determineCardColor(flop.charAt(14));
 
+    //get card symbols
     var card1Symbol = determineSuitSymbol(flop.charAt(6));
     var card2Symbol = determineSuitSymbol(flop.charAt(10));
     var card3Symbol = determineSuitSymbol(flop.charAt(14));
 
+    //display FLOP, card numeral, and card suit 1 by 1
     document.getElementById("street").innerHTML = "FLOP: ";
     document.getElementById("card1").innerHTML = card1 + card1Symbol;
     document.getElementById("card2").innerHTML = card2 + card2Symbol;
     document.getElementById("card3").innerHTML = card3 + card3Symbol;
 
+    //assign the appropriate color
     document.getElementById("card1").style.color = card1Color;
     document.getElementById("card2").style.color = card2Color;
     document.getElementById("card3").style.color = card3Color;
 }
 
-//pre-condition: flop is formatted as: TURN[5s, 4d, Kd, Ac]
+//pre-condition: turn is formatted as: TURN[5s, 4d, Kd, Ac]
 function displayTurn(turn) {
     var card4 = turn.charAt(17);
     var card4Color = determineCardColor(turn.charAt(18));
@@ -170,7 +182,7 @@ function displayTurn(turn) {
 //pre-condition: flop is formatted as: RIVER[5s, 4d, Kd, Ac, Jh]
 function displayRiver(river) {
     //in order to make string indexing consistent with flop and turn (both 4 char long),
-    //just splice the r in river to make it a 4 char string ("iver"). just makes it easier
+    //just splice the r in river to make it a 4 char string ("iver"). just makes it easier to follow
     var iver = river.substring(1,river.length);
     var card5 = iver.charAt(21);
     var card5Color = determineCardColor(iver.charAt(22));
@@ -180,6 +192,9 @@ function displayRiver(river) {
     document.getElementById("card5").style.color = card5Color;
 }
 
+//pre-condition: suit will be a char('s','c','d', or 'h').
+//this method serves as an auxilliary helper method for replacing an 's' with
+//an actual spade symbol for example...
 function determineSuitSymbol(suit) {
     switch(suit) {
         case 's':
@@ -193,6 +208,9 @@ function determineSuitSymbol(suit) {
     }
 }
 
+//pre-condition: suit will be a char('s','c','d', or 'h').
+//this method serves as an auxilliary helper method for determining what color
+//suits are to be.
 function determineCardColor(suit) {
     switch(suit) {
         case 's': //black
@@ -206,6 +224,9 @@ function determineCardColor(suit) {
     }
 }
 
+//pre-condition: name is formatted as: namepThisIsMyName or nameoThisIsYourName
+//this function is called when both players are connected, displays the names
+//in the respective positions
 function displayNames(name) {
     if (name.charAt(4) == 'o') {
         document.getElementById("opponent").innerHTML = name.substring(5,name.length);
@@ -215,6 +236,7 @@ function displayNames(name) {
     }
 }
 
+//Don't really need this. We can just default this in HTML itself.
 function setUserNames() {
     document.getElementById("inputField").placeholder = "Enter Input";
     document.getElementById("player").innerHTML = "YOU";
