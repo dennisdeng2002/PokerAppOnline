@@ -405,6 +405,12 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         game.players.get(otherPlayerID).addMessage("chipso" + this.money);
     }
 
+    public void displayHoleCards() {
+        messages.add("cardsp" + holeCards[0] + " " + holeCards[1]);
+        send();
+        clearMessages();
+    }
+
     public void initializePlayerDisplays(HeadsUpPlayer player, HeadsUpPlayer opponent) {
         messages.add("namep" + player.name);
         messages.add("nameo" + opponent.name);

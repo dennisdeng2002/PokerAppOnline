@@ -102,6 +102,7 @@ public class HeadsUpHand implements Serializable {
             game.players.get(j).resetStreetMoney();
             game.players.get(j).setEndAction(false);
             game.players.get(j).addChipsToMessage();
+            game.players.get(j).displayHoleCards();
         }
 
         //If preflop post SB/BB

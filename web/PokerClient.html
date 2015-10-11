@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<p>
 <head>
     <style type="text/css">
         h1 {
@@ -63,8 +63,6 @@
             background-color:#5cbf2a;
         }
 
-
-
     </style>
 </head>
 
@@ -73,15 +71,20 @@
     <h1>PokerApp</h1>
     <br/><br/>
     <div class="playerprofile">
+        <p id=""opponentCards>[?] [?]</p>
         <p id="opponent">Opponent</p>
-        <p id="opponentChips">opponent chips</p>
+        <p id="opponentChips"></p>
     </div>
     <br/><br/>
     <textarea id="messageArea" rows="10" cols="40" readonly></textarea>
     <br/><br/>
     <div class="playerprofile">
+        <p id="playerCards">
+            <p id="playerFirstCardNum"></p><span id="playerFirstCardSuit"></span>
+            <span id="playerSecondCardNum"></span><span id="playerSecondCardSuit"></span>
+        </p>
         <p id="player">You</p>
-        <p id="playerChips">player chips</p>
+        <p id="playerChips"></p>
     </div>
     <input type="text" id="inputField" onkeydown="if(event.keyCode==13)
        {sendToServer(document.getElementById('inputField'))}">

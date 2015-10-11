@@ -24,6 +24,10 @@ webSocket.onmessage = function(message){
         displayNames(evt);
         return;
     }
+    if (evt.substring(0,5) == "cards") {
+        displayCards(evt);
+        return;
+    }
     addMessage(evt);
 }
 
@@ -58,9 +62,40 @@ function sendToServer(message){
 //o for opponent and p for player
 function displayChips(amount) {
     if (amount.charAt(5) == 'o') {
-        document.getElementById("opponentChips").innerHTML = amount.substring(6,amount.length);
+        document.getElementById("opponentChips").innerHTML = '$'+amount.substring(6,amount.length);
     } else if (amount.charAt(5) == 'p') {
-        document.getElementById("playerChips").innerHTML = amount.substring(6,amount.length);
+        document.getElementById("playerChips").innerHTML = '$'+amount.substring(6,amount.length);
+    }
+}
+
+function displayCards(cards) {
+    if (cards.charAt(5) == 'o') {
+        document.getElementById("opponentCards").innerHTML = cards.substring(6,cards.length);
+    } else if (cards.charAt(5) == 'p') {
+        document.getElementById("playerCards").innerHTML = cards.substring(6,cards.length);
+        document.getElementById("playerFirstCardNum").innerHTML = cards.charAt(6);
+        document.getElementById("playerSecondCardNum").innerHTML = cards.charAt(9);
+        document.getElementById("playerFirstCardNum").style.color = "rgb(155, 102, 102)";
+    }
+    changeCardColor(cards.substring(6,8));
+    changeCardColor(cards.substring(6,8));
+}
+
+function changeCardColor(card) {
+    var suit = card.charAt(0);
+    switch(suit) {
+        case 's':
+            card.style.color = "rgb(155, 102, 102)";
+            break;
+        case 'c':
+            card.style.color = "rgb(155, 102, 102)";
+            break;
+        case 'd':
+            card.style.color = "rgb(155, 102, 102)";
+            break;
+        case 'h':
+            card.style.color = "rgb(155, 102, 102)";
+            break;
     }
 }
 
@@ -69,6 +104,7 @@ function displayNames(name) {
         document.getElementById("opponent").innerHTML = name.substring(5,name.length);
     } else if (name.charAt(4) == 'p') {
         document.getElementById("player").innerHTML = name.substring(5,name.length);
+
     }
 }
 
