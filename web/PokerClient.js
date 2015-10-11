@@ -69,33 +69,51 @@ function displayChips(amount) {
 }
 
 function displayCards(cards) {
+    var colorOfFirstCard = determineCardColor(cards.charAt(7));
+    var colorOfSecondCard = determineCardColor(cards.charAt(10));
+    var symbolOfFirstSuit = determineSuitSymbol(cards.charAt(7));
+    var symbolOfSecondSuit = determineSuitSymbol(cards.charAt(10));
     if (cards.charAt(5) == 'o') {
         document.getElementById("opponentCards").innerHTML = cards.substring(6,cards.length);
     } else if (cards.charAt(5) == 'p') {
-        document.getElementById("playerCards").innerHTML = cards.substring(6,cards.length);
+        //document.getElementById("playerCards").innerHTML = cards.substring(6,cards.length);
+        //lay out the text
         document.getElementById("playerFirstCardNum").innerHTML = cards.charAt(6);
+        document.getElementById("playerFirstCardSuit").innerHTML = symbolOfFirstSuit;
         document.getElementById("playerSecondCardNum").innerHTML = cards.charAt(9);
-        document.getElementById("playerFirstCardNum").style.color = "rgb(155, 102, 102)";
+        document.getElementById("playerSecondCardSuit").innerHTML = symbolOfSecondSuit;
+
+        //style the color
+        document.getElementById("playerFirstCardNum").style.color = colorOfFirstCard;
+        document.getElementById("playerFirstCardSuit").style.color = colorOfFirstCard;
+        document.getElementById("playerSecondCardNum").style.color = colorOfSecondCard;
+        document.getElementById("playerSecondCardSuit").style.color = colorOfSecondCard;
     }
-    changeCardColor(cards.substring(6,8));
-    changeCardColor(cards.substring(6,8));
 }
 
-function changeCardColor(card) {
-    var suit = card.charAt(0);
+function determineSuitSymbol(suit) {
     switch(suit) {
         case 's':
-            card.style.color = "rgb(155, 102, 102)";
-            break;
+            return "&#9824";
         case 'c':
-            card.style.color = "rgb(155, 102, 102)";
-            break;
+            return "&#9827";
         case 'd':
-            card.style.color = "rgb(155, 102, 102)";
-            break;
+            return "&#9830";
         case 'h':
-            card.style.color = "rgb(155, 102, 102)";
-            break;
+            return "&#9829";
+    }
+}
+
+function determineCardColor(suit) {
+    switch(suit) {
+        case 's': //black
+            return "rgb(0,0,0)";
+        case 'c': //green
+            return "rgb(51, 214, 51)";
+        case 'd': //blue
+            return "rgb(0, 0, 205)";
+        case 'h': //red
+            return "rgb(232, 0, 0)";
     }
 }
 
