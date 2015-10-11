@@ -28,8 +28,30 @@ webSocket.onmessage = function(message){
         displayCards(evt);
         return;
     }
+    if (evt.substring(0,7) == "PREFLOP") {
+        displayPreflop(evt);
+    }
+    if (evt.substring(0,4) == "FLOP") {
+        displayFlop(evt);
+        return;
+    }
+    if (evt.substring(0,4) == "TURN") {
+        displayTurn(evt);
+        return;
+    }
+    if (evt.substring(0,5) == "RIVER") {
+        displayRiver(evt);
+        return;
+    }
+    if (evt.substring(0,5) == "clear") {
+        clearStreetConsole();
+        return;
+    }
+    //else
     addMessage(evt);
 }
+
+
 
 webSocket.onerror = function(error){
     console.log("Error", error);
@@ -45,18 +67,33 @@ function addMessage(message){
     }
     else{
         currentMessages.value = currentMessages.value + message + "\n";
+
+
     }
 }
 
 //Function is called when ENTER is pressed, sends content of the textfield
 //message gets sent to Java(?)
 function sendToServer(message){
-    if (message == ""){
+    if (message == ""){ //if user enters a blank input disregard it
         return;
     }
     webSocket.send(message.value);
     //Reset input field
     document.getElementById("inputField").value = "";
+}
+
+function clearStreetConsole() {
+    document.getElementById("street").innerHTML = "";
+    document.getElementById("card1").innerHTML = "";
+    document.getElementById("card2").innerHTML = "";
+    document.getElementById("card3").innerHTML = "";
+    document.getElementById("card4").innerHTML = "";
+    document.getElementById("card5").innerHTML = "";
+    //var consoleArea = document.getElementsByClassName("consoleArea").children;
+    //for (i = 0; i < consoleArea.length; i++) {
+    //    consoleArea[i].innerHTML = "";
+    //}
 }
 
 //o for opponent and p for player
@@ -89,6 +126,58 @@ function displayCards(cards) {
         document.getElementById("playerSecondCardNum").style.color = colorOfSecondCard;
         document.getElementById("playerSecondCardSuit").style.color = colorOfSecondCard;
     }
+}
+
+
+function displayPreflop(preflop) {
+    document.getElementById("street").innerHTML = "PREFLOP";
+}
+
+//pre-condition: flop is formatted as: FLOP[5s, 4d, Kd]
+function displayFlop(flop) {
+    var card1 = flop.charAt(5);
+    var card2 = flop.charAt(9);
+    var card3 = flop.charAt(13);
+
+    var card1Color = determineCardColor(flop.charAt(6));
+    var card2Color = determineCardColor(flop.charAt(10));
+    var card3Color = determineCardColor(flop.charAt(14));
+
+    var card1Symbol = determineSuitSymbol(flop.charAt(6));
+    var card2Symbol = determineSuitSymbol(flop.charAt(10));
+    var card3Symbol = determineSuitSymbol(flop.charAt(14));
+
+    document.getElementById("street").innerHTML = "FLOP: ";
+    document.getElementById("card1").innerHTML = card1 + card1Symbol;
+    document.getElementById("card2").innerHTML = card2 + card2Symbol;
+    document.getElementById("card3").innerHTML = card3 + card3Symbol;
+
+    document.getElementById("card1").style.color = card1Color;
+    document.getElementById("card2").style.color = card2Color;
+    document.getElementById("card3").style.color = card3Color;
+}
+
+//pre-condition: flop is formatted as: TURN[5s, 4d, Kd, Ac]
+function displayTurn(turn) {
+    var card4 = turn.charAt(17);
+    var card4Color = determineCardColor(turn.charAt(18));
+    var card4Symbol = determineSuitSymbol(turn.charAt(18));
+    document.getElementById("street").innerHTML = "TURN: ";
+    document.getElementById("card4").innerHTML = card4 + card4Symbol;
+    document.getElementById("card4").style.color = card4Color;
+}
+
+//pre-condition: flop is formatted as: RIVER[5s, 4d, Kd, Ac, Jh]
+function displayRiver(river) {
+    //in order to make string indexing consistent with flop and turn (both 4 char long),
+    //just splice the r in river to make it a 4 char string ("iver"). just makes it easier
+    var iver = river.substring(1,river.length);
+    var card5 = iver.charAt(21);
+    var card5Color = determineCardColor(iver.charAt(22));
+    var card5Symbol = determineSuitSymbol(iver.charAt(22));
+    document.getElementById("street").innerHTML = "RIVER: ";
+    document.getElementById("card5").innerHTML = card5 + card5Symbol;
+    document.getElementById("card5").style.color = card5Color;
 }
 
 function determineSuitSymbol(suit) {

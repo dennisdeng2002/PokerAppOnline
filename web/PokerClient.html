@@ -12,13 +12,15 @@
             font-family: Serif;
         }
         input {
-            width: 300px;
+            width: 250px;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
         textarea {
             width: 300px;
+            max-width:250px;
+            max-height: 250px;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -70,6 +72,12 @@
             font-size: 20px;
             font-weight: bold;
         }
+        .consoleArea {
+            text-align: center;
+            font-family: Serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -82,7 +90,15 @@
         <p id="opponent">Opponent</p>
         <p id="opponentChips"></p>
     </div>
-    <br/><br/>
+    <br/><br/><br/><br/>
+    <div class="consoleArea" readonly>
+        <span id="street"></span>
+        <span id="card1"></span>
+        <span id="card2"></span>
+        <span id="card3"></span>
+        <span id="card4"></span>
+        <span id="card5"></span>
+    </div>
     <textarea id="messageArea" rows="10" cols="40" readonly></textarea>
     <br/><br/>
     <div class="playerprofile">

@@ -398,6 +398,12 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         }
     }
 
+    public void clearStreetInConsole() {
+        messages.add("clear");
+        send();
+        clearMessages();
+    }
+
     public void addChipsToMessage() {
         messages.add("chipsp" + this.money);
         messages.add("chipso" + game.players.get(otherPlayerID).getMoney());
