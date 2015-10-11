@@ -12,19 +12,18 @@ public class PokerLobby extends Thread{
     public PokerLobby(){}
 
     //Poker lobby runs continuously, and starts a new game whenever two players are in the queue
-    public void run(){
+    public void run() {
         System.out.println("Running");
-        while(true){
-            if(queuedPlayers.size()>1 && queuedPlayers.get(0).getPlayerName() != null && queuedPlayers.get(1).getPlayerName() != null){
+        while (true) {
+            if (queuedPlayers.size() > 1 && queuedPlayers.get(0).getPlayerName() != null && queuedPlayers.get(1).getPlayerName() != null) {
                 setPlayerIDs(queuedPlayers);
-                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0),queuedPlayers.get(1),false);
+                HeadsUpDriver driver = new HeadsUpDriver(queuedPlayers.get(0), queuedPlayers.get(1), false);
                 driver.start();
                 //Remove is safer than clear since there is a small possibility
                 //player is added to queue while a new game is starting
                 queuedPlayers.remove(0);
                 queuedPlayers.remove(0);
-            }
-            else if(queuedPlayers.size()!=0 && queuedPlayers.get(0).versusBot && queuedPlayers.get(0).getPlayerName() != null){
+            } else if (queuedPlayers.size() != 0 && queuedPlayers.get(0).versusBot && queuedPlayers.get(0).getPlayerName() != null) {
                 String botName = "Bot" + numOfBots;
                 numOfBots++;
                 queuedPlayers.get(0).setID(0);
@@ -34,17 +33,17 @@ public class PokerLobby extends Thread{
                 driver.start();
                 queuedPlayers.remove(0);
             }
-
             //Allow system to pause every 500 ms
-            try{
+
+            try {
                 Thread.sleep(500);
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void addPlayer(HeadsUpPlayer player){
+    public void addPlayer(HeadsUpPlayer player) {
         //Keeps track of all players in game
         players.add(player);
         //Adds a new player to queue

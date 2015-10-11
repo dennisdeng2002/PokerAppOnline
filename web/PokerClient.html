@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <style type="text/css">
-
         h1 {
             text-align: center;
-            font-family: Georgia;
+            font-family: Serif;
             font-size: 30px;
+        }
+        .playerprofile {
+            text-align: center;
+            font-family: Serif;
         }
         input {
             width: 300px;
@@ -14,30 +17,81 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         textarea {
             width: 300px;
             display: block;
             margin-left: auto;
             margin-right: auto;
+            text-align: center;
+        }
+        .buttonArea {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        button {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #5cbf2a));
+            background:-moz-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+            background:-webkit-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+            background:-o-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+            background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+            background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
+            background-color:#DAFFDA;
+            -moz-border-radius:18px;
+            -webkit-border-radius:18px;
+            border-radius:18px;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Trebuchet MS;
+            font-size:12px;
+            padding:5px 18px;
+            text-decoration:none;
+            text-shadow:0px 0px 0px #2f6627;
+            outline:none;
+        }
+        button:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cbf2a), color-stop(1, #44c767));
+            background:-moz-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+            background:-webkit-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+            background:-o-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+            background:-ms-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+            background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cbf2a', endColorstr='#44c767',GradientType=0);
+            background-color:#5cbf2a;
         }
 
+
+
     </style>
+</head>
 
     <meta charset="UTF-8">
     <title></title>
-</head>
-<h1>PokerApp</h1>
-<script src="PokerClient.js"></script>
-
-<textarea id="messageArea" rows="10" cols="40" readonly></textarea>
-<br/><br/>
-<input type="text" placeholder="User Action:" id="inputField" onkeydown="if(event.keyCode==13)
+    <h1>PokerApp</h1>
+    <br/><br/>
+    <div class="playerprofile">
+        <p id="opponent">Opponent</p>
+        <p id="opponentChips">opponent chips</p>
+    </div>
+    <br/><br/>
+    <textarea id="messageArea" rows="10" cols="40" readonly></textarea>
+    <br/><br/>
+    <div class="playerprofile">
+        <p id="player">You</p>
+        <p id="playerChips">player chips</p>
+    </div>
+    <input type="text" id="inputField" onkeydown="if(event.keyCode==13)
        {sendToServer(document.getElementById('inputField'))}">
-
-
-
-
-</html>
+    <br/><br/>
+    <div class="buttonArea">
+        <button type="button" id="betButton" value="bet" onclick="sendToServer(document.getElementById('betButton'))">Bet</button>
+        <button type="button" id="checkButton" value="check" onclick="sendToServer(document.getElementById('checkButton'))">Check</button>
+        <button type="button" id="callButton" value="call" onclick="sendToServer(document.getElementById('callButton'))">Call</button>
+        <button type="button" id="foldButton" value="fold" onclick="sendToServer(document.getElementById('foldButton'))">Fold</button>
+    </div>
+    <script src="PokerClient.js"></script>
 </body>
 </html>

@@ -2,10 +2,7 @@
 
 
 package poker;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.io.*;
 
 public class HeadsUpPokerGame implements Serializable {
@@ -62,6 +59,7 @@ public class HeadsUpPokerGame implements Serializable {
             player2.startGameMessage(player1.getPlayerName());
         }
 
+
         try{
             Thread.sleep(2500);
         }catch(InterruptedException e){
@@ -82,9 +80,11 @@ public class HeadsUpPokerGame implements Serializable {
 
 
     public void startNewHand() {
-
         while (gameIsLive) {
+            players.get(0).initializePlayerDisplays(players.get(0), players.get(1));
+            players.get(1).initializePlayerDisplays(players.get(1), players.get(0));
             hands.add(new HeadsUpHand(this));
+
             //End game
             if(players.size()==1){
                 break;

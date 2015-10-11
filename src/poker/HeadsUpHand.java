@@ -57,7 +57,7 @@ public class HeadsUpHand implements Serializable {
     }
 
     public void printBoard(int street, int handNum, HeadsUpPlayer player) {
-
+        player.addChipsToMessage();
         switch(street) {
             case PRE_FLOP:
                 player.addMessage("PREFLOP");
@@ -101,6 +101,7 @@ public class HeadsUpHand implements Serializable {
         for (int j = 0; j < game.players.size(); j++) {
             game.players.get(j).resetStreetMoney();
             game.players.get(j).setEndAction(false);
+            game.players.get(j).addChipsToMessage();
         }
 
         //If preflop post SB/BB
@@ -374,12 +375,8 @@ public class HeadsUpHand implements Serializable {
         //Gets id of player who hasn't folded
         int winnerID = activePlayers.get(0).getID();
         int loserID;
-        if(winnerID == 0){
-            loserID = 1;
-        }
-        else{
-            loserID = 0;
-        }
+        loserID = (winnerID==0)? 1 : 0;
+
         String winnerMessage = game.players.get(loserID).getPlayerName() + " folded, "
                 + game.players.get(winnerID).getPlayerName() + " is the winner";
 

@@ -1,11 +1,7 @@
 package poker;
 
-import com.sun.tools.javac.util.ArrayUtils;
-import org.eclipse.jetty.util.ArrayUtil;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 public class Deck {

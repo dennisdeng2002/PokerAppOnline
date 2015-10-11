@@ -48,12 +48,14 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
     //Runs only once when player connects (might be unnecessary to start Thread just to add name)
+    //this is a Runnable run
     public void run(){
-        if(this.name==null){
-            addMessage("Enter player name");
-            send();
-            clearMessages();
-            this.name = receive();
+      if(this.name==null) {
+//          this.name = receive();
+          addMessage("Enter player name");
+          send();
+          clearMessages();
+          this.name = receive();
         }
         waitingMessage();
     }
@@ -66,53 +68,37 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         return holeCards;
     }
 
-    public int getMoney() {
-
-        return money;
-
-    }
+    public int getMoney() { return money; }
 
     public void receiveHand(Card[] hand) {
-
         holeCards[0] = hand[0];
         holeCards[1] = hand[1];
         folded = false;
-
     }
 
     public void postBB() {
-
         if (money == 1) {
             money -= 1;
         } else {
             money -= HeadsUpPokerGame.BIG_BLIND;
         }
-
     }
 
     public void postSB() {
-
         money -= HeadsUpPokerGame.SMALL_BLIND;
-
     }
 
 
     protected void spendMoney(int amount) {
-
         money -= amount;
-
     }
 
     public boolean playerFolded() {
-
         return this.folded;
-
     }
 
     protected void fold() {
-
         folded = true;
-
     }
 
     public int getID(){
@@ -146,6 +132,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         boolean isCorrect = false;
         String action;
         int betSize = minimumBet;
+
         if(!this.folded && !this.isAllIn) {
             while(!isCorrect && isPlaying){
                 //Output board
@@ -153,6 +140,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 // Output hand and player stats
                 addMessage(this.toString(game));
                 addMessage("Bet/Check/Call/Fold");
+                addChipsToMessage();
                 send();
                 clearMessages();
                 if(!isPlaying){
@@ -179,7 +167,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                             }catch(NumberFormatException e){
                                 e.printStackTrace();
                             }
-
+                            addChipsToMessage();
+                            send();
+                            clearMessages();
                             //For headsup this is fine since there isn't a scenario where your betsize is
                             //larger than how much the other player has and also less that what you have
                             if (betSize > game.players.get(otherPlayerID).getMoney()){
@@ -191,6 +181,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
                                 isCorrect = true;
+                                addChipsToMessage();
+                                send();
+                                clearMessages();
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " puts you all in");
                                 }
@@ -210,10 +203,16 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " is all in");
                                 }
+                                addChipsToMessage();
+                                send();
+                                clearMessages();
                             } else if(betSize < 2*minimumBet || betSize == 0) {
                                 addMessage("Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)
                                 betSize = minimumBet;
+                                addChipsToMessage();
+                                send();
+                                clearMessages();
                             } else {
                                 //Any additional bet is total (don't have to remember previous bet)
                                 this.spendMoney(betSize - streetMoney);
@@ -224,6 +223,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " bet " + betSize);
                                 }
+                                addChipsToMessage();
+                                send();
+                                clearMessages();
                             }
                             break;
                         }
@@ -264,6 +266,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 game.players.get(otherPlayerID).addMessage(name + " is all in");
                             }
                         }
+                        addChipsToMessage();
+                        send();
+                        clearMessages();
                     }
                     else{
                         //Otherwise calling subtracts the betsize minus the money you already put in the point
@@ -275,6 +280,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         if(!versusBot){
                             game.players.get(otherPlayerID).addMessage(name + " called " + betSize);
                         }
+                        addChipsToMessage();
+                        send();
+                        clearMessages();
                     }
                 }
                 else if(action.equalsIgnoreCase("Fold")) {
@@ -290,6 +298,9 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         else{
             betSize = 0;
         }
+        addChipsToMessage();
+        send();
+        clearMessages();
         return betSize;
     }
 
@@ -342,6 +353,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         messages.add("new");
     }
 
+
+
     private void send(){
         try {
             for(int i = 0; i < messages.size(); i++){
@@ -385,7 +398,23 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         }
     }
 
-    public void startGameMessage(String opponent){
+    public void addChipsToMessage() {
+        messages.add("chipsp" + this.money);
+        messages.add("chipso" + game.players.get(otherPlayerID).getMoney());
+        game.players.get(otherPlayerID).addMessage("chipsp" + game.players.get(otherPlayerID).money);
+        game.players.get(otherPlayerID).addMessage("chipso" + this.money);
+    }
+
+    public void initializePlayerDisplays(HeadsUpPlayer player, HeadsUpPlayer opponent) {
+        messages.add("namep" + player.name);
+        messages.add("nameo" + opponent.name);
+        messages.add("chipsp" + player.money);
+        messages.add("chipso" + opponent.money);
+        send();
+        clearMessages();
+    }
+
+    public void startGameMessage(String opponent) {
         addMessage("Game has started, your opponent is " + opponent);
         send();
         clearMessages();
