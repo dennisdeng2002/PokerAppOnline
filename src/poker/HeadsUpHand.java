@@ -109,10 +109,12 @@ public class HeadsUpHand implements Serializable {
         if(streetIn == PRE_FLOP){
             //Post sb and set how much sb has bet
             game.players.get(game.sbIndex).postSB();
+            game.players.get(game.sbIndex).displayBlind("SB/D");
             game.players.get(game.sbIndex).setStreetMoney(HeadsUpPokerGame.SMALL_BLIND);
 
             //Post bb and set how much bb has bet
             game.players.get(game.bbIndex).postBB();
+            game.players.get(game.bbIndex).displayBlind("D");
             game.players.get(game.bbIndex).setStreetMoney(HeadsUpPokerGame.BIG_BLIND);
 
             this.addToPot(HeadsUpPokerGame.SMALL_BLIND + HeadsUpPokerGame.BIG_BLIND);

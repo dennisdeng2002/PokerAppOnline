@@ -50,6 +50,10 @@ webSocket.onmessage = function(message){
         clearStreetConsole();
         return;
     }
+    if (evt.substring(0,5) == "blind") {
+        displayBlinds(evt);
+        return;
+    }
     //else
     addMessage(evt);
 }
@@ -107,6 +111,15 @@ function displayChips(amount) {
         document.getElementById("opponentChips").innerHTML = '$'+amount.substring(6,amount.length);
     } else if (amount.charAt(5) == 'p') {
         document.getElementById("playerChips").innerHTML = '$'+amount.substring(6,amount.length);
+    }
+}
+
+//incoming message will be formatted for example, "blindpBB" or "blindoSB/D"
+function displayBlinds(blind) {
+    if (blind.charAt(5) == 'p') { //if incoming message pertains to player blind ('p')
+        document.getElementById("playerBlind").innerHTML = blind.substring(6, blind.length);
+    } else { //if incoming message pertains to opponent blind ('o')
+        document.getElementById("opponentBlind").innerHTML = blind.substring(6, blind.length);
     }
 }
 

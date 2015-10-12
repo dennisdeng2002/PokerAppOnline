@@ -423,6 +423,18 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         clearMessages();
     }
 
+    public void displayBlind(String blind) {
+        if (blind.equals("D")) {
+            messages.add("blindp" + "BB");
+            messages.add("blindo" + "SB/D");
+        } else { //if blind == "SB/D"
+            messages.add("blindp" + "SB/D");
+            messages.add("blindo" + "BB");
+        }
+        send();
+        clearMessages();
+    }
+
     //called right before a hand starts
     //player names will never change once it is set so maybe it is redundant
     //to keep sending their names every time we start a hand
