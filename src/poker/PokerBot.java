@@ -265,14 +265,14 @@ public class PokerBot extends HeadsUpPlayer{
     public int call(){
         hand.addToPot(minimumBet - streetMoney);
         spendMoney(minimumBet - streetMoney);
-        if(streetIn!=12){
+        if(streetIn!=12 && this.endAction){
             game.players.get(otherPlayerID).addMessage(this.name + " called " + minimumBet);
         }
         return minimumBet;
     }
 
     public int check(){
-        if(streetIn!=12){
+        if(streetIn!=12 && this.endAction){
             game.players.get(otherPlayerID).addMessage(this.name + " checked");
         }
         return 0;

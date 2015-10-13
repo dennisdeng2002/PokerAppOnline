@@ -26,6 +26,11 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public boolean isConnected;
     public boolean versusBot;
     protected HeadsUpPokerGame game;
+    private boolean isCorrect;
+    private boolean isNumericBet;
+    private boolean isNumericCall;
+    private boolean isNumericCheck;
+
 
     //Default Constructor
     public HeadsUpPlayer(){}
@@ -129,7 +134,10 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     //In that method, each player is looped through to act();
     public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn) {
 
-        boolean isCorrect = false;
+        isCorrect = false;
+        isNumericBet = false;
+        isNumericCall = false;
+        isNumericCheck = false;
         String action;
         int betSize = minimumBet;
 
@@ -148,29 +156,48 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 }
                 action = receive();
 
+                //Check if received action is a number
+                //If yes determine whether it CAN be a call or bet and proceed accordingly
+                //If no an exception is thrown and everything below parseInt() is voided
+                try{
+                    if(!isPlaying){
+                        break;
+                    }
+                    betSize = Integer.parseInt(action);
+                    if(betSize<minimumBet){
+                        betSize = minimumBet;
+                        isNumericCall = true;
+                    }
+                    else if(betSize == 0){
+                        isNumericCheck = true;
+                    }
+                    else{
+                        isNumericBet = true;
+                    }
+                }catch(NumberFormatException e){
+                }
+
                 // Checks what action user inputs
-                if(action.equalsIgnoreCase("Bet")) {
+                if(action.equalsIgnoreCase("Bet") || isNumericBet) {
                     while(true){
                         //Output board
                         hand.printBoard(streetIn, game.handNumber, this);
                         // Output hand and player stats
                         addMessage(this.toString(game));
                         try{
-                            addMessage("Size");
-                            send();
-                            clearMessages();
-                            //Requires exception?
-                            try{
-                                if(!isPlaying){
-                                    break;
+                            if(!isNumericBet){
+                                addMessage("Size");
+                                send();
+                                clearMessages();
+                                try{
+                                    if(!isPlaying){
+                                        break;
+                                    }
+                                    betSize = Integer.parseInt(receive());
+                                }catch(NumberFormatException e){
+                                    e.printStackTrace();
                                 }
-                                betSize = Integer.parseInt(receive());
-                            }catch(NumberFormatException e){
-                                e.printStackTrace();
                             }
-                            addChipsToMessage();
-                            send();
-                            clearMessages();
 
                             if (money <= betSize) {
                                 //If betsize is greater than money, player is all in
@@ -184,9 +211,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " is all in");
                                 }
-                                addChipsToMessage();
-                                send();
-                                clearMessages();
                             } else if (betSize > game.players.get(otherPlayerID).getMoney()){
                                 //Only allow player to bet how much other player has
                                 betSize = game.players.get(otherPlayerID).getMoney();
@@ -196,9 +220,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
                                 isCorrect = true;
-                                addChipsToMessage();
-                                send();
-                                clearMessages();
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " puts you all in");
                                 }
@@ -209,22 +230,16 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 addMessage("Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)
                                 betSize = minimumBet;
-                                addChipsToMessage();
-                                send();
-                                clearMessages();
                             } else {
                                 //Any additional bet is total (don't have to remember previous bet)
                                 this.spendMoney(betSize - streetMoney);
-                                hand.addToPot(betSize-streetMoney);
+                                hand.addToPot(betSize - streetMoney);
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
                                 isCorrect = true;
                                 if(!versusBot){
                                     game.players.get(otherPlayerID).addMessage(name + " bet " + betSize);
                                 }
-                                addChipsToMessage();
-                                send();
-                                clearMessages();
                             }
                             break;
                         }
@@ -235,7 +250,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     }
                 }
                 //we need a way for BB to check b/c minbet is still > 0 for him
-                else if(action.equalsIgnoreCase("Check")) {
+                else if(action.equalsIgnoreCase("Check") || isNumericCheck) {
                     if(minimumBet - streetMoney > 0){
                         addMessage("You cannot check when the pot is raised");
                     } else{
@@ -246,7 +261,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         }
                     }
                 }
-                else if(action.equalsIgnoreCase("Call")) {
+                else if(action.equalsIgnoreCase("Call") || isNumericCall) {
                     if(minimumBet == 0 || minimumBet - streetMoney == 0){
                         addMessage("You cannot call when there is no bet");
                     }
@@ -265,9 +280,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 game.players.get(otherPlayerID).addMessage(name + " is all in");
                             }
                         }
-                        addChipsToMessage();
-                        send();
-                        clearMessages();
                     }
                     else{
                         //Otherwise calling subtracts the betsize minus the money you already put in the point
@@ -279,9 +291,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         if(!versusBot){
                             game.players.get(otherPlayerID).addMessage(name + " called " + betSize);
                         }
-                        addChipsToMessage();
-                        send();
-                        clearMessages();
                     }
                 }
                 else if(action.equalsIgnoreCase("Fold")) {
