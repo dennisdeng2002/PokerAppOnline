@@ -31,6 +31,7 @@ public class HeadsUpPokerGame implements Serializable {
         //Total starting players
         totalPlayers = numOfPlayers;
         this.versusBot = versusBot;
+        System.out.println(this.versusBot);
 
         handNumber = 0;
         sbIndex = 0;

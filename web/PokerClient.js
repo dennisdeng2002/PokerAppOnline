@@ -54,8 +54,16 @@ webSocket.onmessage = function(message){
         displayBlinds(evt);
         return;
     }
-    //else
-    addMessage(evt);
+    if (evt.substring(0,3) == "pot") {
+        displayPot(evt);
+        return;
+    }
+    if (evt.substring(0,3) == "gen") {
+        displayGeneralText(evt);
+        return;
+    }
+    displayGeneralText("new");
+    //addMessage(evt);
 }
 
 
@@ -120,6 +128,30 @@ function displayBlinds(blind) {
     } else { //if incoming message pertains to opponent blind ('o')
         document.getElementById("opponentBlind").innerHTML = blind.substring(6, blind.length);
     }
+}
+
+function displayPot(pot) {
+    document.getElementById("pot").innerHTML = "Pot: $" + pot.substring(3,pot.length);
+}
+
+function displayGeneralText(text) {
+    //var currentMessages = document.getElementById("generalText").innerHTML;
+    //if(text == "new"){
+    //    currentMessages = "";
+    //}
+    //else{
+    //    currentMessages = currentMessages + text + "\n";
+    //
+    //}
+    var currentMessages = document.getElementById("generalText").innerHTML;
+    if (text == "new") {
+        console.log("new")
+        currentMessages = "";
+    } else {
+        console.log(currentMessages);
+        currentMessages = currentMessages + "<br/>" + text.substring(3,text.length);
+    }
+    document.getElementById("generalText").innerHTML = currentMessages;
 }
 
 function displayCards(cards) {

@@ -57,7 +57,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public void run(){
       if(this.name==null) {
 //          this.name = receive();
-          addMessage("Enter player name");
+          addMessage("gen" + "Enter player name");
           send();
           clearMessages();
           this.name = receive();
@@ -134,6 +134,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     //In that method, each player is looped through to act();
     public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn) {
 
+        System.out.println("act");
         isCorrect = false;
         isNumericBet = false;
         isNumericCall = false;
@@ -146,8 +147,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 //Output board
                 hand.printBoard(streetIn, game.handNumber, this);
                 // Output hand and player stats
-                addMessage(this.toString(game));
-                addMessage("Bet/Check/Call/Fold");
+                //addMessage(this.toString(game));
+                addMessage("gen" + "Bet/Check/Call/Fold");
                 addChipsToMessage();
                 send();
                 clearMessages();
@@ -183,10 +184,10 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         //Output board
                         hand.printBoard(streetIn, game.handNumber, this);
                         // Output hand and player stats
-                        addMessage(this.toString(game));
+                        //addMessage(this.toString(game));
                         try{
                             if(!isNumericBet){
-                                addMessage("Size");
+                                addMessage("gen" + "Size");
                                 send();
                                 clearMessages();
                                 try{
@@ -209,7 +210,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 hand.increaseAllInCounter();
                                 isCorrect = true;
                                 if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage(name + " is all in");
+                                    game.players.get(otherPlayerID).addMessage("gen" + name + " is all in");
                                 }
                             } else if (betSize > game.players.get(otherPlayerID).getMoney()){
                                 //Only allow player to bet how much other player has
@@ -221,13 +222,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 streetMoney = betSize;
                                 isCorrect = true;
                                 if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage(name + " puts you all in");
+                                    game.players.get(otherPlayerID).addMessage("gen" + name + " puts you all in");
                                 }
                                 //Increase all in counter so that
                                 //when other player calls further actions are skipped
                                 hand.increaseAllInCounter();
                             } else if(betSize < 2*minimumBet || betSize == 0) {
-                                addMessage("Illegal bet size");
+                                addMessage("gen" + "Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)
                                 betSize = minimumBet;
                             } else {
@@ -238,13 +239,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 streetMoney = betSize;
                                 isCorrect = true;
                                 if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage(name + " bet " + betSize);
+                                    game.players.get(otherPlayerID).addMessage("gen" + name + " bet " + betSize);
                                 }
                             }
                             break;
                         }
                         catch(InputMismatchException e) {
-                            addMessage("Not a number");
+                            addMessage("gen" + "Not a number");
                             continue;
                         }
                     }
@@ -252,18 +253,18 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 //we need a way for BB to check b/c minbet is still > 0 for him
                 else if(action.equalsIgnoreCase("Check") || isNumericCheck) {
                     if(minimumBet - streetMoney > 0){
-                        addMessage("You cannot check when the pot is raised");
+                        addMessage("gen" + "You cannot check when the pot is raised");
                     } else{
                         isCorrect = true;
                         betSize = 0;
                         if(!versusBot){
-                            game.players.get(otherPlayerID).addMessage(name + " checked");
+                            game.players.get(otherPlayerID).addMessage("gen" + name + " checked");
                         }
                     }
                 }
                 else if(action.equalsIgnoreCase("Call") || isNumericCall) {
                     if(minimumBet == 0 || minimumBet - streetMoney == 0){
-                        addMessage("You cannot call when there is no bet");
+                        addMessage("gen" + "You cannot call when there is no bet");
                     }
                     else if(money <= minimumBet){
                         betSize = money;
@@ -277,7 +278,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         isCorrect = true;
                         if(streetIn!=12){
                             if(!versusBot){
-                                game.players.get(otherPlayerID).addMessage(name + " is all in");
+                                game.players.get(otherPlayerID).addMessage("gen" + name + " is all in");
                             }
                         }
                     }
@@ -289,7 +290,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         isCorrect = true;
                         betSize = minimumBet;
                         if(!versusBot){
-                            game.players.get(otherPlayerID).addMessage(name + " called " + betSize);
+                            game.players.get(otherPlayerID).addMessage("gen" + name + " called " + betSize);
                         }
                     }
                 }
@@ -299,7 +300,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     betSize = 0;
                 }
                 else {
-                    addMessage("Incorrect action, please try again");
+                    addMessage("gen" + "Incorrect action, please try again");
                 }
             }
         }
@@ -319,7 +320,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         //Output board
         hand.printBoard(streetIn, game.handNumber, this);
         // Output hand and player stats
-        addMessage(this.toString(game));
+        //addMessage(this.toString(game));
         send();
         clearMessages();
 
@@ -344,7 +345,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
     public void endGameMessage(){
-        addMessage("Game is over");
+        addMessage("gen" + "Game is over");
         send();
         clearMessages();
     }
@@ -459,13 +460,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
     public void startGameMessage(String opponent) {
-        addMessage("Game has started, your opponent is " + opponent);
+        addMessage("gen" + "Game has started, your opponent is " + opponent);
         send();
         clearMessages();
     }
 
     public void waitingMessage(){
-        addMessage("Waiting for player to connect");
+        addMessage("gen" + "Waiting for player to connect");
         send();
         clearMessages();
     }

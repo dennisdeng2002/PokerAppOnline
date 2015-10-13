@@ -95,17 +95,19 @@
             <p id="opponentBlind"></p>
         </div>
     </div>
-    <br/><br/><br/>
+    <br/><br/>
     <div class="consoleArea" readonly>
+        <span id="pot"></span> <br/>
         <span id="street"></span>
         <span id="card1"></span>
         <span id="card2"></span>
         <span id="card3"></span>
         <span id="card4"></span>
-        <span id="card5"></span>
-    </div>
-    <textarea id="messageArea" rows="10" cols="40" readonly></textarea>
-    <br/><br/>
+        <span id="card5"></span><br/>
+        <span id="generalText">adas</span>
+    </div><br/><br/>
+    <!--<textarea id="messageArea" rows="10" cols="40" readonly></textarea>-->
+    <!--<br/><br/>-->
     <div class="playerprofile">
         <p id="playerCards">
             <span id="playerFirstCardNum"></span><span id="playerFirstCardSuit"></span>
@@ -119,7 +121,7 @@
     </div>
     <input type="text" id="inputField" onkeydown="if(event.keyCode==13)
        {sendToServer(document.getElementById('inputField'))}">
-    <br/><br/>
+    <br/>
     <div class="buttonArea">
         <button type="button" id="betButton" value="bet" onclick="sendToServer(document.getElementById('betButton'))">Bet</button>
         <button type="button" id="checkButton" value="check" onclick="sendToServer(document.getElementById('checkButton'))">Check</button>

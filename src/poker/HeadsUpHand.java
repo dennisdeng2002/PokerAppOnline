@@ -72,7 +72,7 @@ public class HeadsUpHand implements Serializable {
                 player.addMessage("RIVER" + Arrays.toString(board));
                 break;
         }
-        player.addMessage("Pot: $" + pot);
+        player.addMessage("pot" + pot);
 
     }
 
@@ -157,18 +157,18 @@ public class HeadsUpHand implements Serializable {
                 if(!game.versusBot){
                     //Allow other player to spectate passively
                     if(tempActionCounter==0){
-                        game.players.get(1).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(1).spectate(this, game, streetIn, "gen" + "Waiting for other player to act");
                         game.players.get(1).setTurnToAct(false);
                     }
                     else{
-                        game.players.get(0).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(0).spectate(this, game, streetIn, "gen" + "Waiting for other player to act");
                         game.players.get(0).setTurnToAct(false);
                     }
                 }
                 else{
                     //Allow other player to spectate passively (bot is always second player added)
                     if(tempActionCounter==1){
-                        game.players.get(0).spectate(this, game, streetIn, "Waiting for other player to act");
+                        game.players.get(0).spectate(this, game, streetIn, "gen" + "Waiting for other player to act");
                         game.players.get(0).setTurnToAct(false);
                     }
                 }
@@ -334,10 +334,11 @@ public class HeadsUpHand implements Serializable {
                         if(game.players.get(l).getID() == idList.get(m)){
                             game.players.get(l).winPot(pot);
                             if(splitPot){
-                                winnerMessage = "Split pot";
+                                winnerMessage = "gen" + "Split pot";
                             }
                             else{
-                                winnerMessage = game.players.get(l).getPlayerName() + " wins with " + Arrays.toString(game.players.get(l).getHoleCards());
+                                winnerMessage = "gen" +  game.players.get(l).getPlayerName() + " wins with " +
+                                        Arrays.toString(game.players.get(l).getHoleCards());
                             }
                             break;
                         }
@@ -401,7 +402,7 @@ public class HeadsUpHand implements Serializable {
         int loserID;
         loserID = (winnerID==0)? 1 : 0;
 
-        String winnerMessage = game.players.get(loserID).getPlayerName() + " folded, "
+        String winnerMessage = "gen" + game.players.get(loserID).getPlayerName() + " folded, "
                 + game.players.get(winnerID).getPlayerName() + " is the winner";
 
         game.players.get(0).spectate(this, game, streetIn, winnerMessage);
