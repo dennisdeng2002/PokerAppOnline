@@ -147,6 +147,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     break;
                 }
                 action = receive();
+
                 // Checks what action user inputs
                 if(action.equalsIgnoreCase("Bet")) {
                     while(true){
@@ -170,28 +171,8 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                             addChipsToMessage();
                             send();
                             clearMessages();
-                            //For headsup this is fine since there isn't a scenario where your betsize is
-                            //larger than how much the other player has and also less that what you have
-                            if (betSize > game.players.get(otherPlayerID).getMoney()){
-                                //Only allow player to bet how much other play has
-                                betSize = game.players.get(otherPlayerID).getMoney();
-                                //Any additional bet is total (don't have to remember previous bet)
-                                this.spendMoney(betSize - streetMoney);
-                                hand.addToPot(betSize-streetMoney);
-                                //Total streetmoney becomes betsize
-                                streetMoney = betSize;
-                                isCorrect = true;
-                                addChipsToMessage();
-                                send();
-                                clearMessages();
-                                if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage(name + " puts you all in");
-                                }
-                                //Increase all in counter so that
-                                //when other player calls further actions are skipped
-                                hand.increaseAllInCounter();
-                            }
-                            else if (money <= betSize) {
+
+                            if (money <= betSize) {
                                 //If betsize is greater than money, player is all in
                                 betSize = money;
                                 this.spendMoney(betSize);
@@ -206,6 +187,24 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 addChipsToMessage();
                                 send();
                                 clearMessages();
+                            } else if (betSize > game.players.get(otherPlayerID).getMoney()){
+                                //Only allow player to bet how much other player has
+                                betSize = game.players.get(otherPlayerID).getMoney();
+                                //Any additional bet is total (don't have to remember previous bet)
+                                   this.spendMoney(betSize - streetMoney);
+                                hand.addToPot(betSize-streetMoney);
+                                //Total streetmoney becomes betsize
+                                streetMoney = betSize;
+                                isCorrect = true;
+                                addChipsToMessage();
+                                send();
+                                clearMessages();
+                                if(!versusBot){
+                                    game.players.get(otherPlayerID).addMessage(name + " puts you all in");
+                                }
+                                //Increase all in counter so that
+                                //when other player calls further actions are skipped
+                                hand.increaseAllInCounter();
                             } else if(betSize < 2*minimumBet || betSize == 0) {
                                 addMessage("Illegal bet size");
                                 //Reset betsize to what was previously bet (miniumum bet)
@@ -411,8 +410,10 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public void addChipsToMessage() {
         messages.add("chipsp" + this.money);
         messages.add("chipso" + game.players.get(otherPlayerID).getMoney());
-        game.players.get(otherPlayerID).addMessage("chipsp" + game.players.get(otherPlayerID).money);
-        game.players.get(otherPlayerID).addMessage("chipso" + this.money);
+        if(!versusBot){
+            game.players.get(otherPlayerID).addMessage("chipsp" + game.players.get(otherPlayerID).money);
+            game.players.get(otherPlayerID).addMessage("chipso" + this.money);
+        }
     }
 
     //displays you hole cards when a hand starts

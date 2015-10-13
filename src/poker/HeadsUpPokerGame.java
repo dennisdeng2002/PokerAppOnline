@@ -82,9 +82,11 @@ public class HeadsUpPokerGame implements Serializable {
     public void startNewHand() {
         while (gameIsLive) {
             players.get(0).initializePlayerDisplays(players.get(0), players.get(1));
-            players.get(1).initializePlayerDisplays(players.get(1), players.get(0));
             players.get(0).clearStreetInConsole();
-            players.get(1).clearStreetInConsole();
+            if(!versusBot){
+                players.get(1).initializePlayerDisplays(players.get(1), players.get(0));
+                players.get(1).clearStreetInConsole();
+            }
             hands.add(new HeadsUpHand(this));
 
             //End game

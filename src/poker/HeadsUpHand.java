@@ -101,20 +101,38 @@ public class HeadsUpHand implements Serializable {
         for (int j = 0; j < game.players.size(); j++) {
             game.players.get(j).resetStreetMoney();
             game.players.get(j).setEndAction(false);
-            game.players.get(j).addChipsToMessage();
-            game.players.get(j).displayHoleCards();
+
+            if(!game.versusBot){
+                game.players.get(j).addChipsToMessage();
+                game.players.get(j).displayHoleCards();
+            }
+            else if(j==0){
+                game.players.get(j).addChipsToMessage();
+                game.players.get(j).displayHoleCards();
+            }
         }
 
         //If preflop post SB/BB
         if(streetIn == PRE_FLOP){
+
+            if(!game.versusBot){
+                game.players.get(game.sbIndex).displayBlind("SB/D");
+                game.players.get(game.bbIndex).displayBlind("D");
+            }
+            else{
+                if(game.sbIndex==0){
+                    game.players.get(0).displayBlind("SB/D");
+                }
+                else{
+                    game.players.get(0).displayBlind("BB");
+                }
+            }
             //Post sb and set how much sb has bet
             game.players.get(game.sbIndex).postSB();
-            game.players.get(game.sbIndex).displayBlind("SB/D");
             game.players.get(game.sbIndex).setStreetMoney(HeadsUpPokerGame.SMALL_BLIND);
 
             //Post bb and set how much bb has bet
             game.players.get(game.bbIndex).postBB();
-            game.players.get(game.bbIndex).displayBlind("D");
             game.players.get(game.bbIndex).setStreetMoney(HeadsUpPokerGame.BIG_BLIND);
 
             this.addToPot(HeadsUpPokerGame.SMALL_BLIND + HeadsUpPokerGame.BIG_BLIND);
@@ -296,47 +314,48 @@ public class HeadsUpHand implements Serializable {
     private void startRiver(){
 
         startStreet(RIVER, startingIndex);
-        //Used to ouput whoever is the winner to the screen
-        String winnerMessage = "";
-        boolean splitPot = false;
-        //Only need to evaluate final hand strengths if by the time action
-        //is over during the river, there is more than 1 player remaining
-        if (activePlayers.size() > 1) {
-            ArrayList<Integer> idList = HandEvaluator.evaluateHeadsUpHands(activePlayers, board);
-            //Splitpot
-            //If non-integer number player closest to dealer gets remainder (not yet implemented)
-            if(idList.size()!=1){
-                pot = pot/(idList.size());
-                splitPot = true;
-            }
-            for(int l = 0; l < game.players.size(); l++){
-                for(int m = 0; m < idList.size(); m++){
-                    //Find winning player (for loop allows for players to be removed)
-                    if(game.players.get(l).getID() == idList.get(m)){
-                        game.players.get(l).winPot(pot);
-                        if(splitPot){
-                            winnerMessage = "Split pot";
+        if(activePlayers.size()!=1){
+            //Used to ouput whoever is the winner to the screen
+            String winnerMessage = "";
+            boolean splitPot = false;
+            //Only need to evaluate final hand strengths if by the time action
+            //is over during the river, there is more than 1 player remaining
+            if (activePlayers.size() > 1) {
+                ArrayList<Integer> idList = HandEvaluator.evaluateHeadsUpHands(activePlayers, board);
+                //Splitpot
+                //If non-integer number player closest to dealer gets remainder (not yet implemented)
+                if(idList.size()!=1){
+                    pot = pot/(idList.size());
+                    splitPot = true;
+                }
+                for(int l = 0; l < game.players.size(); l++){
+                    for(int m = 0; m < idList.size(); m++){
+                        //Find winning player (for loop allows for players to be removed)
+                        if(game.players.get(l).getID() == idList.get(m)){
+                            game.players.get(l).winPot(pot);
+                            if(splitPot){
+                                winnerMessage = "Split pot";
+                            }
+                            else{
+                                winnerMessage = game.players.get(l).getPlayerName() + " wins with " + Arrays.toString(game.players.get(l).getHoleCards());
+                            }
+                            break;
                         }
-                        else{
-                            winnerMessage = game.players.get(l).getPlayerName() + " wins with " + Arrays.toString(game.players.get(l).getHoleCards());
-                        }
-                        break;
                     }
                 }
             }
-        }
-        if(!game.versusBot){
             game.players.get(0).spectate(this, game, RIVER, winnerMessage);
-            game.players.get(1).spectate(this, game, RIVER, winnerMessage);
-        }
-        else{
-            game.players.get(0).spectate(this, game, RIVER, winnerMessage);
-        }
-        //Pause game for 5000ms (will either move on to next hand or end)
-        try{
-            Thread.sleep(5000);
-        }catch (InterruptedException e){
-            e.printStackTrace();
+            if(!game.versusBot){
+                game.players.get(1).spectate(this, game, RIVER, winnerMessage);
+            }
+
+            //Pause game for 5000ms (will either move on to next hand or end)
+            try{
+                Thread.sleep(5000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
         }
 
         //Only retain players that have >$0 and reset allin
@@ -347,7 +366,9 @@ public class HeadsUpHand implements Serializable {
             if(game.players.get(i).getMoney()==0){
                 //For heads up once a player is removed game is over (or rebuys - requires implementation)
                 game.players.get(0).endGameMessage();
-                game.players.get(1).endGameMessage();
+                if(!game.versusBot){
+                    game.players.get(1).endGameMessage();
+                }
                 //Pause game for 5000ms
                 try{
                     Thread.sleep(5000);
@@ -383,12 +404,9 @@ public class HeadsUpHand implements Serializable {
         String winnerMessage = game.players.get(loserID).getPlayerName() + " folded, "
                 + game.players.get(winnerID).getPlayerName() + " is the winner";
 
+        game.players.get(0).spectate(this, game, streetIn, winnerMessage);
         if(!game.versusBot){
-            game.players.get(0).spectate(this, game, streetIn, winnerMessage);
             game.players.get(1).spectate(this, game, streetIn, winnerMessage);
-        }
-        else{
-            game.players.get(0).spectate(this, game, streetIn, winnerMessage);
         }
         //Pause game for 2500ms
         try{

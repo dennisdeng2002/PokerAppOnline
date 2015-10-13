@@ -75,7 +75,6 @@ function addMessage(message){
     else{
         currentMessages.value = currentMessages.value + message + "\n";
 
-
     }
 }
 
@@ -197,11 +196,40 @@ function displayRiver(river) {
     //in order to make string indexing consistent with flop and turn (both 4 char long),
     //just splice the r in river to make it a 4 char string ("iver"). just makes it easier to follow
     var iver = river.substring(1,river.length);
+
+    //get card numerals
+    var card1 = iver.charAt(5);
+    var card2 = iver.charAt(9);
+    var card3 = iver.charAt(13);
+    var card4 = iver.charAt(17);
     var card5 = iver.charAt(21);
+
+    //get card colors
+    var card1Color = determineCardColor(iver.charAt(6));
+    var card2Color = determineCardColor(iver.charAt(10));
+    var card3Color = determineCardColor(iver.charAt(14));
+    var card4Color = determineCardColor(iver.charAt(18));
     var card5Color = determineCardColor(iver.charAt(22));
+
+    //get card symbols
+    var card1Symbol = determineSuitSymbol(iver.charAt(6));
+    var card2Symbol = determineSuitSymbol(iver.charAt(10));
+    var card3Symbol = determineSuitSymbol(iver.charAt(14));
+    var card4Symbol = determineSuitSymbol(iver.charAt(18));
     var card5Symbol = determineSuitSymbol(iver.charAt(22));
+
     document.getElementById("street").innerHTML = "RIVER: ";
+
+    document.getElementById("card1").innerHTML = card1 + card1Symbol;
+    document.getElementById("card2").innerHTML = card2 + card2Symbol;
+    document.getElementById("card3").innerHTML = card3 + card3Symbol;
+    document.getElementById("card4").innerHTML = card4 + card4Symbol;
     document.getElementById("card5").innerHTML = card5 + card5Symbol;
+
+    document.getElementById("card1").style.color = card1Color;
+    document.getElementById("card2").style.color = card2Color;
+    document.getElementById("card3").style.color = card3Color;
+    document.getElementById("card4").style.color = card4Color;
     document.getElementById("card5").style.color = card5Color;
 }
 
