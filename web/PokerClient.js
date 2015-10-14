@@ -3,13 +3,13 @@ var webSocket = new WebSocket("ws://localhost:8080/PokerClient")
 //All webSocket.on* functions are called when their respective
 //annotated methods in the PokerWebSocket are called
 webSocket.onopen = function(){
-    addMessage("Connected to PokerApp");
-    setUserNames();
+    displayGeneralText("gen" + "Connected to PokerApp");
+    //setUserNames();
 }
 
 webSocket.onclose = function(){
-    addMessage("new");
-    addMessage("Disconnected from PokerApp");
+    displayGeneralText("new");
+    displayGeneralText("gen" + "Disconnected from PokerApp");
 }
 
 //These are messages received from the server
@@ -19,6 +19,7 @@ webSocket.onclose = function(){
 //the message will be treated normally and added to the message area.
 webSocket.onmessage = function(message){
     var evt = message.data;
+    console.log(evt)
     if (evt.substring(0,5) == "chips") {
         displayChips(evt);
         return;
@@ -62,7 +63,10 @@ webSocket.onmessage = function(message){
         displayGeneralText(evt);
         return;
     }
-    displayGeneralText("new");
+    if (evt.substring(0,3) == "new") {
+        displayGeneralText("new");
+        return;
+    }
     //addMessage(evt);
 }
 
@@ -145,10 +149,8 @@ function displayGeneralText(text) {
     //}
     var currentMessages = document.getElementById("generalText").innerHTML;
     if (text == "new") {
-        console.log("new")
         currentMessages = "";
     } else {
-        console.log(currentMessages);
         currentMessages = currentMessages + "<br/>" + text.substring(3,text.length);
     }
     document.getElementById("generalText").innerHTML = currentMessages;
@@ -315,4 +317,3 @@ function setUserNames() {
     document.getElementById("player").innerHTML = "YOU";
     document.getElementById("opponent").innerHTML = "OPPONENT";
 }
-

@@ -134,7 +134,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     //In that method, each player is looped through to act();
     public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn) {
 
-        System.out.println("act");
         isCorrect = false;
         isNumericBet = false;
         isNumericCall = false;
@@ -146,8 +145,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
             while(!isCorrect && isPlaying){
                 //Output board
                 hand.printBoard(streetIn, game.handNumber, this);
-                // Output hand and player stats
-                //addMessage(this.toString(game));
                 addMessage("gen" + "Bet/Check/Call/Fold");
                 addChipsToMessage();
                 send();
@@ -165,12 +162,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         break;
                     }
                     betSize = Integer.parseInt(action);
-                    if(betSize<minimumBet){
+
+                    if(betSize == 0){
+                        isNumericCheck = true;
+                    }
+                    else if(betSize <= minimumBet){
                         betSize = minimumBet;
                         isNumericCall = true;
-                    }
-                    else if(betSize == 0){
-                        isNumericCheck = true;
                     }
                     else{
                         isNumericBet = true;
@@ -304,23 +302,18 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 }
             }
         }
+        //Skip player after he's folded, return 0
         else{
             betSize = 0;
         }
-        addChipsToMessage();
-        send();
-        clearMessages();
         return betSize;
     }
 
     public synchronized void spectate(HeadsUpHand hand, HeadsUpPokerGame game, 
     									int streetIn, String message) {
-        clearMessages();
-        addMessage(message);
-        //Output board
+
         hand.printBoard(streetIn, game.handNumber, this);
-        // Output hand and player stats
-        //addMessage(this.toString(game));
+        addMessage(message);
         send();
         clearMessages();
 
