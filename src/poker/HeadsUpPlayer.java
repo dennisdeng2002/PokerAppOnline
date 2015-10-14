@@ -287,6 +287,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         hand.addToPot(minimumBet - streetMoney);
                         isCorrect = true;
                         betSize = minimumBet;
+                        streetMoney = betSize;
                         if(!versusBot){
                             game.players.get(otherPlayerID).addMessage("gen" + name + " called " + betSize);
                         }
@@ -428,7 +429,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     }
 
     public void displayBlind(String blind) {
-        if (blind.equals("D")) {
+        if (blind.equals("BB")) {
             messages.add("blindp" + "BB");
             messages.add("blindo" + "SB/D");
         } else { //if blind == "SB/D"

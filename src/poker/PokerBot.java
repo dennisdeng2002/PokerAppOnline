@@ -248,14 +248,14 @@ public class PokerBot extends HeadsUpPlayer{
 
         if(betSize >= money){
             betSize = money;
-            game.players.get(otherPlayerID).addMessage(name + " is all in");
+            game.players.get(otherPlayerID).addMessage("gen" + name + " is all in");
         }
         else if(betSize >= game.players.get(otherPlayerID).money){
             betSize = game.players.get(otherPlayerID).money;
-            game.players.get(otherPlayerID).addMessage(name + " puts you all in");
+            game.players.get(otherPlayerID).addMessage("gen" + name + " puts you all in");
         }
         else{
-            game.players.get(otherPlayerID).addMessage(this.name + " bet " + betSize);
+            game.players.get(otherPlayerID).addMessage("gen" + this.name + " bet " + betSize);
         }
         hand.addToPot(betSize);
         spendMoney(betSize);
@@ -266,14 +266,14 @@ public class PokerBot extends HeadsUpPlayer{
         hand.addToPot(minimumBet - streetMoney);
         spendMoney(minimumBet - streetMoney);
         if(streetIn!=12 && this.endAction){
-            game.players.get(otherPlayerID).addMessage(this.name + " called " + minimumBet);
+            game.players.get(otherPlayerID).addMessage("gen" + this.name + " called " + minimumBet);
         }
         return minimumBet;
     }
 
     public int check(){
         if(streetIn!=12 && this.endAction){
-            game.players.get(otherPlayerID).addMessage(this.name + " checked");
+            game.players.get(otherPlayerID).addMessage("gen" + this.name + " checked");
         }
         return 0;
     }

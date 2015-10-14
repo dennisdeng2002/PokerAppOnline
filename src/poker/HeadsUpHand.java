@@ -117,10 +117,10 @@ public class HeadsUpHand implements Serializable {
 
             if(!game.versusBot){
                 game.players.get(game.sbIndex).displayBlind("SB/D");
-                game.players.get(game.bbIndex).displayBlind("D");
+                game.players.get(game.bbIndex).displayBlind("BB");
             }
             else{
-                if(game.sbIndex==0){
+                if(game.sbIndex == 0){
                     game.players.get(0).displayBlind("SB/D");
                 }
                 else{
