@@ -42,6 +42,8 @@ public class HeadsUpHand implements Serializable {
         //deal 2 cards to each player
         for (int i = 0; i < game.players.size(); i++) {
             game.players.get(i).receiveHand(deck.deal(2));
+            //Reset all ins (must be done before hand starts - previously occured at end of hand)
+            game.players.get(i).isAllIn = false;
         }
 
         //pre-load the board
@@ -209,6 +211,8 @@ public class HeadsUpHand implements Serializable {
                         }
                     }
                 }
+//                System.out.println(game.players.get(0).endAction + " " + game.players.get(0).getPlayerName() + " " + game.players.get(0).isAllIn);
+//                System.out.println(game.players.get(1).endAction + " " + game.players.get(1).getPlayerName() + " " + game.players.get(1).isAllIn);
 
                 //Cycle through whose turn it is (different from how many players)
                 if (tempActionCounter == game.players.size() - 1) {
@@ -361,8 +365,6 @@ public class HeadsUpHand implements Serializable {
 
         //Only retain players that have >$0 and reset allin
         for(int i = 0; i < game.players.size(); i++){
-            //Reset all ins
-            game.players.get(i).isAllIn = false;
             //Determine if player has been eliminated
             if(game.players.get(i).getMoney()==0){
                 //For heads up once a player is removed game is over (or rebuys - requires implementation)

@@ -137,7 +137,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
         isCorrect = false;
         String action;
         int betSize = minimumBet;
-
         if(!this.folded && !this.isAllIn) {
             while(!isCorrect && isPlaying){
                 //Reset all numeric actions
@@ -210,13 +209,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 hand.increaseAllInCounter();
                                 isCorrect = true;
                                 if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage("gen" + name + " is all in");
+                                    game.players.get(otherPlayerID).addMessage("gen" + name + " is all in for " + betSize + streetMoney);
                                 }
                             } else if (betSize > game.players.get(otherPlayerID).getMoney()){
                                 //Only allow player to bet how much other player has
                                 betSize = game.players.get(otherPlayerID).getMoney();
                                 //Any additional bet is total (don't have to remember previous bet)
-                                   this.spendMoney(betSize - streetMoney);
+                                this.spendMoney(betSize - streetMoney);
                                 hand.addToPot(betSize-streetMoney);
                                 //Total streetmoney becomes betsize
                                 streetMoney = betSize;
