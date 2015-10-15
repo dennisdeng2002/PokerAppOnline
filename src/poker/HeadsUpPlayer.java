@@ -135,14 +135,17 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public synchronized int act(int minimumBet, int pot, HeadsUpHand hand, HeadsUpPokerGame game, int streetIn) {
 
         isCorrect = false;
-        isNumericBet = false;
-        isNumericCall = false;
-        isNumericCheck = false;
         String action;
         int betSize = minimumBet;
 
         if(!this.folded && !this.isAllIn) {
             while(!isCorrect && isPlaying){
+                //Reset all numeric actions
+                //Allows for user to input incorrect numeric action
+                //and still continue loop
+                isNumericBet = false;
+                isNumericCall = false;
+                isNumericCheck = false;
                 //Output board
                 hand.printBoard(streetIn, game.handNumber, this);
                 addMessage("gen" + "Bet/Check/Call/Fold");
@@ -153,7 +156,6 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     break;
                 }
                 action = receive();
-
                 //Check if received action is a number
                 //If yes determine whether it CAN be a call or bet and proceed accordingly
                 //If no an exception is thrown and everything below parseInt() is voided
@@ -177,7 +179,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 }
 
                 // Checks what action user inputs
-                if(action.equalsIgnoreCase("Bet") || isNumericBet) {
+                if(action.toLowerCase().startsWith("b") || isNumericBet) {
                     while(true){
                         //Output board
                         hand.printBoard(streetIn, game.handNumber, this);
@@ -249,7 +251,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                     }
                 }
                 //we need a way for BB to check b/c minbet is still > 0 for him
-                else if(action.equalsIgnoreCase("Check") || isNumericCheck) {
+                else if(action.toLowerCase().startsWith("ch") || isNumericCheck) {
                     if(minimumBet - streetMoney > 0){
                         addMessage("gen" + "You cannot check when the pot is raised");
                     } else{
@@ -260,7 +262,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         }
                     }
                 }
-                else if(action.equalsIgnoreCase("Call") || isNumericCall) {
+                else if(action.toLowerCase().startsWith("ca") || isNumericCall) {
                     if(minimumBet == 0 || minimumBet - streetMoney == 0){
                         addMessage("gen" + "You cannot call when there is no bet");
                     }
@@ -293,7 +295,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                         }
                     }
                 }
-                else if(action.equalsIgnoreCase("Fold")) {
+                else if(action.toLowerCase().startsWith("f")) {
                     this.fold();
                     isCorrect = true;
                     betSize = 0;
@@ -488,6 +490,21 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                 holeCards[0] + holeCards[1] + "--" + position;
         return retVal;
 
+    }
+
+    public void receiveChatMessage(String message){
+        //After receiving message from client, both players must be sent same message
+        //back to client side
+        sendChatMessage(this.name + ": " + message);
+        game.players.get(otherPlayerID).sendChatMessage(this.name + ": " + message);
+    }
+
+    public void sendChatMessage(String message){
+        try {
+            session.getRemote().sendString(message);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

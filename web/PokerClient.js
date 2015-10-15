@@ -20,6 +20,7 @@ webSocket.onclose = function(){
 webSocket.onmessage = function(message){
     var evt = message.data;
     console.log(evt)
+    //if-break/if-break == if/else-if
     if (evt.substring(0,5) == "chips") {
         displayChips(evt);
         return;
@@ -67,6 +68,10 @@ webSocket.onmessage = function(message){
         displayGeneralText("new");
         return;
     }
+    if (evt.substring(evt.length-4, evt.length) == "chat") {
+        displayChatText(evt);
+        return;
+    }
     //addMessage(evt);
 }
 
@@ -76,29 +81,31 @@ webSocket.onerror = function(error){
     console.log("Error", error);
 }
 
-//Displays messages on messageArea
-function addMessage(message){
-    var currentMessages = document.getElementById("messageArea");
-    //Anytime a message starts with new we clear the messageArea
-    //Allows for multi-line messages from the server (all messages are appended otherwise)
-    if(message == "new"){
-        currentMessages.value = "";
-    }
-    else{
-        currentMessages.value = currentMessages.value + message + "\n";
-
-    }
-}
-
 //Function is called when ENTER is pressed, sends content of the textfield
 //message gets sent to Java(?)
 function sendToServer(message){
     if (message == ""){ //if user enters a blank input disregard it
         return;
     }
-    webSocket.send(message.value);
+    else{
+        webSocket.send(message.value);
+    }
     //Reset input field
     document.getElementById("inputField").value = "";
+}
+
+function sendChatToServer(message){
+    if (message == ""){ //if user enters a blank input disregard it
+        return;
+    }
+    else{
+        //Appending chat on the end makes it easier
+        //to add player names to front of message
+        //ex. hi -> hichat -> (from server) name: hichat
+        webSocket.send(message.value + "chat");
+    }
+    //Reset input field
+    document.getElementById("chatInputField").value = "";
 }
 
 //This function is called right before a new Hand is initiated. Clears out
@@ -114,6 +121,11 @@ function clearStreetConsole() {
     //for (i = 0; i < consoleArea.length; i++) {
     //    consoleArea[i].innerHTML = "";
     //}
+}
+
+function displayChatText(message){
+    var chat = document.getElementById("chatArea");
+    chat.value = chat.value + message.substring(0, message.length-4) + "\n";
 }
 
 //o for opponent and p for player
