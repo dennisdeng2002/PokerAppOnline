@@ -495,8 +495,13 @@ public class HeadsUpPlayer extends Thread implements Serializable{
     public void receiveChatMessage(String message){
         //After receiving message from client, both players must be sent same message
         //back to client side
-        sendChatMessage(this.name + ": " + message);
-        game.players.get(otherPlayerID).sendChatMessage(this.name + ": " + message);
+        if(isPlaying){
+            sendChatMessage(this.name + ": " + message);
+            game.players.get(otherPlayerID).sendChatMessage(this.name + ": " + message);
+        }
+        else{
+            sendChatMessage(this.name + ": " + message);
+        }
     }
 
     public void sendChatMessage(String message){

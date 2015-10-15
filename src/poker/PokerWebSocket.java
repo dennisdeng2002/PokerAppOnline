@@ -40,7 +40,7 @@ public class PokerWebSocket {
 
     @OnWebSocketMessage
     public void handleMessage (String message) {
-        if(message.substring(message.length()-4, message.length()).equals("chat")){
+        if(message.length()>4 && message.substring(message.length()-4, message.length()).equals("chat")){
             player.receiveChatMessage(message);
         }
         else{
