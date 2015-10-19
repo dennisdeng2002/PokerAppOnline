@@ -4,7 +4,6 @@ var webSocket = new WebSocket("ws://localhost:8080/PokerClient")
 //annotated methods in the PokerWebSocket are called
 webSocket.onopen = function(){
     displayGeneralText("gen" + "Connected to PokerApp");
-    //setUserNames();
 }
 
 webSocket.onclose = function(){
@@ -72,9 +71,7 @@ webSocket.onmessage = function(message){
         displayChatText(evt);
         return;
     }
-    //addMessage(evt);
 }
-
 
 
 webSocket.onerror = function(error){
@@ -321,11 +318,4 @@ function displayNames(name) {
         document.getElementById("player").innerHTML = name.substring(5,name.length);
 
     }
-}
-
-//Don't really need this. We can just default this in HTML itself.
-function setUserNames() {
-    document.getElementById("inputField").placeholder = "Enter Input";
-    document.getElementById("player").innerHTML = "YOU";
-    document.getElementById("opponent").innerHTML = "OPPONENT";
 }

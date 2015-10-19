@@ -209,7 +209,7 @@ public class HeadsUpPlayer extends Thread implements Serializable{
                                 hand.increaseAllInCounter();
                                 isCorrect = true;
                                 if(!versusBot){
-                                    game.players.get(otherPlayerID).addMessage("gen" + name + " is all in for " + betSize + streetMoney);
+                                    game.players.get(otherPlayerID).addMessage("gen" + name + " is all in for " + betSize);
                                 }
                             } else if (betSize > game.players.get(otherPlayerID).getMoney()){
                                 //Only allow player to bet how much other player has

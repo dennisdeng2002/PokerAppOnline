@@ -1,0 +1,5 @@
+/.idea
+out/
+.git
+*.DS_Store
+PokerAppOnline.iml

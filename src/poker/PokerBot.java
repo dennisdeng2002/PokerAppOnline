@@ -248,9 +248,9 @@ public class PokerBot extends HeadsUpPlayer{
 
         if(betSize >= money){
             betSize = money;
-            game.players.get(otherPlayerID).addMessage("gen" + name + " is all in for " + betSize + streetMoney);
+            game.players.get(otherPlayerID).addMessage("gen" + name + " is all in for " + betSize);
         }
-        else if(betSize >= game.players.get(otherPlayerID).money){
+        else if(betSize > game.players.get(otherPlayerID).money){
             betSize = game.players.get(otherPlayerID).money;
             game.players.get(otherPlayerID).addMessage("gen" + name + " puts you all in");
         }
